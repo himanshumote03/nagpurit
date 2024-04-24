@@ -91,7 +91,7 @@ public class UserRestController {
 
         User user = new User();
         user.setId(userDto.getId());
-        user.setLoginId(userDto.getLoginId());
+        user.setLoginDetails(userDto.getLoginDetails());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setLanguage(userDto.getLanguage());
@@ -126,7 +126,7 @@ public class UserRestController {
             // Update product information
             existingUser.setFirstName(userDto.getFirstName());
             existingUser.setLastName(userDto.getLastName());
-            existingUser.setLoginId(userDto.getLoginId());
+            existingUser.setLoginDetails(userDto.getLoginDetails());
             existingUser.setImage(storageFileName);
             existingUser.setLanguage(userDto.getLanguage());
             existingUser.setGithubUrl(userDto.getGithubUrl());

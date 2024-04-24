@@ -12,8 +12,9 @@ public class User {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "login_id")
-    private int loginId;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "login_id")
+    private LoginDetails loginDetails;
 
     @Column(name = "image")
     private String image;
@@ -43,8 +44,7 @@ public class User {
 
     }
 
-    public User(int loginId, String image, String firstName, String lastName, String language, String githubUrl, String linkdinUrl, LocalDateTime created, LocalDateTime modified) {
-        this.loginId = loginId;
+    public User( String image, String firstName, String lastName, String language, String githubUrl, String linkdinUrl, LocalDateTime created, LocalDateTime modified) {
         this.image = image;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -65,12 +65,12 @@ public class User {
         this.id = id;
     }
 
-    public int getLoginId() {
-        return loginId;
+    public LoginDetails getLoginDetails() {
+        return loginDetails;
     }
 
-    public void setLoginId(int loginId) {
-        this.loginId = loginId;
+    public void setLoginDetails(LoginDetails loginDetails) {
+        this.loginDetails = loginDetails;
     }
 
     public String getImage() {
@@ -135,5 +135,21 @@ public class User {
 
     public void setModified(LocalDateTime modified) {
         this.modified = modified;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", loginDetails=" + loginDetails +
+                ", image='" + image + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", language='" + language + '\'' +
+                ", githubUrl='" + githubUrl + '\'' +
+                ", linkdinUrl='" + linkdinUrl + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
     }
 }
