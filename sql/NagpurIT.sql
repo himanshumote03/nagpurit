@@ -6,7 +6,7 @@
 --
 -- Database Name:
 -- 
-DROP DATABASE nagpurit;
+DROP DATABASE IF EXISTS nagpurit;
 CREATE DATABASE IF NOT EXISTS nagpurit;
 USE nagpurit;
 
@@ -134,11 +134,11 @@ CREATE TABLE `career_goal` (
 --
 DROP TABLE IF EXISTS `course_categories`;
 CREATE TABLE `course_categories` (
-  `id` INT NOT NULL PRIMARY KEY,
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `course_type` VARCHAR(255) DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   `modified` DATETIME NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 --
