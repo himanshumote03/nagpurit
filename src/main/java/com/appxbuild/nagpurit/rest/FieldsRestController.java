@@ -59,10 +59,10 @@ public class FieldsRestController {
     @DeleteMapping("fields/{id}")
     public String deleteField(@PathVariable int id){
         Fields theFields = fieldsService.findById(id);
-        fieldsService.deleteById(id);
         if(theFields==null){
             throw new RuntimeException("Field id is not found " + id);
         }
+        fieldsService.deleteById(id);
         return "Deleted Field id " + id;
     }
 

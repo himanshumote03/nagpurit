@@ -3,24 +3,26 @@ package com.appxbuild.nagpurit.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "fields_details")
-public class FieldsDetails {
+@Table(name = "my_courses")
+public class MyCourses {
 
     // define fields
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "field_id", referencedColumnName = "id")
-    private Fields fields;
+    @JoinColumn(name = "login_id", referencedColumnName = "id")
+    private LoginDetails loginDetails;
 
-    @Column(name = "field_name")
-    private String fieldName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private Courses courses;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -28,17 +30,11 @@ public class FieldsDetails {
     @Column(name = "modified")
     private LocalDateTime modified;
 
-    @OneToMany(mappedBy = "fieldsDetails")
-    private List<CareerGoal> careerGoals;
-
     // define constructor
-    public FieldsDetails(){
+    public MyCourses(){
 
     }
-
-    public FieldsDetails(Fields fields, String fieldName, LocalDateTime created, LocalDateTime modified) {
-        this.fields = fields;
-        this.fieldName = fieldName;
+    public MyCourses(LocalDateTime created, LocalDateTime modified) {
         this.created = created;
         this.modified = modified;
     }
@@ -52,20 +48,20 @@ public class FieldsDetails {
         this.id = id;
     }
 
-    public Fields getFields() {
-        return fields;
+    public LoginDetails getLoginDetails() {
+        return loginDetails;
     }
 
-    public void setFields(Fields fields) {
-        this.fields = fields;
+    public void setLoginDetails(LoginDetails loginDetails) {
+        this.loginDetails = loginDetails;
     }
 
-    public String getFieldName() {
-        return fieldName;
+    public Courses getCourses() {
+        return courses;
     }
 
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
+    public void setCourses(Courses courses) {
+        this.courses = courses;
     }
 
     public LocalDateTime getCreated() {
@@ -87,10 +83,10 @@ public class FieldsDetails {
     // define toString method
     @Override
     public String toString() {
-        return "FieldsDetails{" +
+        return "MyCourses{" +
                 "id=" + id +
-                ", fields=" + fields +
-                ", fieldName='" + fieldName + '\'' +
+                ", loginDetails=" + loginDetails +
+                ", courses=" + courses +
                 ", created=" + created +
                 ", modified=" + modified +
                 '}';

@@ -3,6 +3,7 @@ package com.appxbuild.nagpurit.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "login_details")
@@ -28,6 +29,9 @@ public class LoginDetails {
 
     @Column(name = "modified")
     private LocalDateTime modified;
+
+    @OneToMany(mappedBy = "loginDetails")
+    private List<CareerGoal> careerGoals;
 
     // Constructor
     public LoginDetails() {}

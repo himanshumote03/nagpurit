@@ -60,12 +60,12 @@ public class FieldsDetailsRestController {
     @DeleteMapping("fieldsDetails/{id}")
     public String deleteFieldsDetails(@PathVariable int id){
         FieldsDetails theFieldsDetails = fieldsDetailsService.findById(id);
-        fieldsDetailsService.deleteById(id);
+
         if(theFieldsDetails==null){
             throw new RuntimeException("Fields Details id is not found " + id);
         }
+        fieldsDetailsService.deleteById(id);
         return "Deleted Fields Details id " + id;
     }
-
 
 }
