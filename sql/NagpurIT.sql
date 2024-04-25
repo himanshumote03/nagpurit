@@ -23,6 +23,8 @@ CREATE TABLE `login_details` (
     `modified` DATETIME NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+INSERT INTO `nagpurit`.`login_details` (`id`, `name`, `email`, `password`) VALUES ('1', 'Himanshu', 'himanshumote@gmail.com', 'himanshu'), ('2', 'Varun', 'varun@gmail.com', 'varun'), ('3', 'Neha', 'neha@gmail.com','neha');
+
 
 --
 -- Table structure for table `user`
@@ -217,11 +219,13 @@ CREATE TABLE `my_courses` (
 --
 DROP TABLE IF EXISTS `installment_plan`;
 CREATE TABLE `installment_plan` (
-  `id` INT NOT NULL PRIMARY KEY,
-  `month` VARCHAR(20) DEFAULT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `no_of_months` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   `modified` DATETIME NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `nagpurit`.`installment_plan` (`id`, `no_of_months`) VALUES ('1', '3'), ('2', '4'), ('3', '5');
 
 
 --
@@ -232,6 +236,8 @@ CREATE TABLE `transactions` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `login_id` INT DEFAULT NULL,
   `amount` INT DEFAULT NULL,
+  `transaction_id` VARCHAR(255) DEFAULT NULL,
+  `status` VARCHAR(45) DEFAULT NULL,
   `payment_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `installment_plan_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

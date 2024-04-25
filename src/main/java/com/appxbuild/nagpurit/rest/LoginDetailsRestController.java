@@ -90,6 +90,7 @@ public class LoginDetailsRestController {
         if(theLoginDetails==null){
             throw new RuntimeException("Login Detail id is not found " + id);
         }
+        loginDetailsService.deleteById(id);
         return "Deleted Login Detail Id " + id;
     }
 
