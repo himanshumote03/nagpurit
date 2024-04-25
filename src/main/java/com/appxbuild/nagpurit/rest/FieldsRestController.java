@@ -27,7 +27,7 @@ public class FieldsRestController {
 
     // add mapping GET("/fields/{id}") to get a Field
     @GetMapping("/fields/{id}")
-    public Fields getField(@PathVariable int id){
+    public Fields getFieldById(@PathVariable int id){
         Fields theFields = fieldsService.findById(id);
         if(theFields==null){
             throw new RuntimeException("Field id is not found " + id);
