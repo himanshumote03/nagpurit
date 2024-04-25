@@ -38,7 +38,6 @@ public class LoginDetailsRestController {
         return theLoginDetails;
     }
 
-
     @PostMapping("/signup")
     public LoginDetails addLoginDetails(@RequestBody LoginDetails loginDetails) {
 

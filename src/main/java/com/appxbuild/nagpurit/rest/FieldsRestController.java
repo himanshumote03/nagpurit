@@ -19,7 +19,7 @@ public class FieldsRestController {
         fieldsService = theFieldsService;
     }
 
-    // add mapping GET "/fields" to get a list of Fields
+    // add mapping GET ("/fields") to get a list of Fields
     @GetMapping("/fields")
     public List<Fields> findAll(){
         return fieldsService.findAll();
@@ -59,10 +59,10 @@ public class FieldsRestController {
     @DeleteMapping("fields/{id}")
     public String deleteField(@PathVariable int id){
         Fields theFields = fieldsService.findById(id);
-        fieldsService.deleteById(id);
         if(theFields==null){
             throw new RuntimeException("Field id is not found " + id);
         }
+        fieldsService.deleteById(id);
         return "Deleted Field id " + id;
     }
 
