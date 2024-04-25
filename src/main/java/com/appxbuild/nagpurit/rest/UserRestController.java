@@ -43,16 +43,16 @@ public class UserRestController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-//    @GetMapping("/user/login/{loginId}")
-//    public ResponseEntity<User> getUserByLoginId(@PathVariable int loginId) {
-//        Optional<User> user = userDao.findAll()
-//                .stream()
-//                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
-//                .findFirst();
-//
-//        return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
+    @GetMapping("/user/login/{loginId}")
+    public ResponseEntity<User> getUserByLoginId(@PathVariable int loginId) {
+        Optional<User> user = userDao.findAll()
+                .stream()
+                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
+                .findFirst();
+
+        return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     @PostMapping("/user")
     public ResponseEntity<String> addUser(

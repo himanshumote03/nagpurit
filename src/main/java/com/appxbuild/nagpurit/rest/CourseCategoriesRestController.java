@@ -43,9 +43,10 @@ public class CourseCategoriesRestController {
         }
         courseCategories.setCreated(existingCourseCategories.getCreated());
 
-        CourseCategories newCourseCategories = courseCategoriesService.save(courseCategories);
         LocalDateTime localDateTime = LocalDateTime.now();
         courseCategories.setModified(localDateTime);
+
+        CourseCategories newCourseCategories = courseCategoriesService.save(courseCategories);
 
         return newCourseCategories;
     }
