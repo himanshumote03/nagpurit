@@ -19,7 +19,7 @@ public class FieldsRestController {
         fieldsService = theFieldsService;
     }
 
-    // add mapping GET "/fields" to get a list of Fields
+    // add mapping GET ("/fields") to get a list of Fields
     @GetMapping("/fields")
     public List<Fields> findAll(){
         return fieldsService.findAll();

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/api")
@@ -29,7 +28,7 @@ public class FieldsDetailsRestController {
     // add mapping for GET("/fieldsDetails/{id}") to get a FieldsDetails
     @GetMapping("fieldsDetails/{id}")
     public FieldsDetails getFieldsDetails(@PathVariable int id){
-        FieldsDetails theFieldsDetails = null;
+        FieldsDetails theFieldsDetails = fieldsDetailsService.findById(id);
         if(theFieldsDetails==null){
             throw new RuntimeException("Fields Details id is not found " + id);
          }
@@ -60,7 +59,6 @@ public class FieldsDetailsRestController {
     @DeleteMapping("fieldsDetails/{id}")
     public String deleteFieldsDetails(@PathVariable int id){
         FieldsDetails theFieldsDetails = fieldsDetailsService.findById(id);
-
         if(theFieldsDetails==null){
             throw new RuntimeException("Fields Details id is not found " + id);
         }

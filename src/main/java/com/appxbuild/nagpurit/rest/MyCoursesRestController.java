@@ -35,6 +35,7 @@ public class MyCoursesRestController {
         return theMyCourses;
     }
 
+    // add mapping POST("/myCourses) to add a MyCourses
     @PostMapping("/myCourses")
     public MyCourses addMyCourse(@RequestBody MyCourses theMyCourses){
         theMyCourses.setId(0);
@@ -45,6 +46,7 @@ public class MyCoursesRestController {
         return newMyCourses;
     }
 
+    // add mapping PUT("/myCourses) to update an existing MyCourses
     @PutMapping("/myCourses")
     public MyCourses updateMyCourse(@RequestBody MyCourses theMyCourses){
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -53,6 +55,7 @@ public class MyCoursesRestController {
         return newMyCourses;
     }
 
+    // add mapping DELETE("/myCourses/{id}") to delete a MyCourses
     @DeleteMapping("/myCourses/{id}")
     public String deleteMyCourse(@PathVariable int id){
         MyCourses theMyCourses = myCoursesService.findById(id);
