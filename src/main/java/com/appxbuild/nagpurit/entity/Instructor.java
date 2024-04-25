@@ -44,7 +44,6 @@ public class Instructor {
     private LocalDateTime modified;
 
     @OneToMany(mappedBy = "instructor")
-    @JsonIgnore
     private List<Courses> courses;
 
     // define constructor
