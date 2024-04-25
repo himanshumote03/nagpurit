@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.dto;
 
+import com.appxbuild.nagpurit.entity.LoginDetails;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UserDto {
@@ -8,7 +9,7 @@ public class UserDto {
 
 //    private LoginDetails loginDetails;
 
-    private int loginId;
+    private LoginDetails loginDetails;
 
     private String firstName;
 
@@ -39,12 +40,12 @@ public class UserDto {
         this.id = id;
     }
 
-    public int getLoginId() {
-        return loginId;
+    public LoginDetails getLoginDetails() {
+        return loginDetails;
     }
 
-    public void setLoginId(int loginId) {
-        this.loginId = loginId;
+    public void setLoginDetails(LoginDetails loginDetails) {
+        this.loginDetails = loginDetails;
     }
 
     public String getFirstName() {
@@ -99,7 +100,7 @@ public class UserDto {
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
-                ", loginId=" + loginId +
+                ", loginDetails=" + loginDetails +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", language='" + language + '\'' +
