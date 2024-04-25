@@ -1,11 +1,8 @@
 package com.appxbuild.nagpurit.rest;
 
 import com.appxbuild.nagpurit.dao.InstructorDao;
-import com.appxbuild.nagpurit.dao.UserDao;
 import com.appxbuild.nagpurit.dto.InstructorDto;
-import com.appxbuild.nagpurit.dto.UserDto;
 import com.appxbuild.nagpurit.entity.Instructor;
-import com.appxbuild.nagpurit.entity.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +39,7 @@ public class InstructorRestController {
 
     // add mapping GET("/instructor/{id}") to get a Instructor
     @GetMapping("/instructor/{id}")
-    public ResponseEntity<Instructor> getCourse(@PathVariable int id) {
+    public ResponseEntity<Instructor> getInstructor(@PathVariable int id) {
         Optional<Instructor> theInstructor = instructorDao.findById(id);
         return theInstructor.map(instructor -> new ResponseEntity<>(instructor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

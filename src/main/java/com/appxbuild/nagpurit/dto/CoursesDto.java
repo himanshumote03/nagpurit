@@ -1,76 +1,54 @@
-package com.appxbuild.nagpurit.entity;
+package com.appxbuild.nagpurit.dto;
 
-import jakarta.persistence.*;
+import com.appxbuild.nagpurit.entity.CourseCategories;
+import com.appxbuild.nagpurit.entity.Instructor;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Entity
-@Table(name = "courses")
-public class Courses {
+public class CoursesDto {
 
     // define fields
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_category_id", referencedColumnName = "id")
     private CourseCategories courseCategories;
 
-    @Column(name = "course_title")
     private String courseTitle;
 
-    @Column(name = "decsription")
     private String description;
 
-    @Column(name = "ratings")
     private Double ratings;
 
-    @Column(name = "image")
-    private String image;
+    private MultipartFile imageFile;
 
-    @Column(name = "language")
     private String  language;
 
-    @Column(name = "sub_title")
     private String subTitle;
 
-    @Column(name = "cost")
     private int cost;
 
-    @Column(name = "course_outcome")
     private String courseOutcome;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
     private Instructor instructor;
 
-    @Column(name = "created")
-    private LocalDateTime created;
-
-    @Column(name = "modified")
-    private LocalDateTime modified;
-
-    @OneToMany(mappedBy = "courses")
-    private List<MyCourses> myCourses;
-
     // define constructor
-    public Courses(){
+    public CoursesDto(){
 
     }
-    public Courses(String courseTitle, String description, Double ratings, String image, String language, String subTitle, int cost, String courseOutcome, LocalDateTime created, LocalDateTime modified) {
+    public CoursesDto(String courseTitle, String description, Double ratings, MultipartFile imageFile, String language, String subTitle, int cost, String courseOutcome) {
         this.courseTitle = courseTitle;
         this.description = description;
         this.ratings = ratings;
-        this.image = image;
+        this.imageFile = imageFile;
         this.language = language;
         this.subTitle = subTitle;
         this.cost = cost;
         this.courseOutcome = courseOutcome;
-        this.created = created;
-        this.modified = modified;
     }
 
     // define getter/setter
@@ -114,12 +92,12 @@ public class Courses {
         this.ratings = ratings;
     }
 
-    public String getImage() {
-        return image;
+    public MultipartFile getImageFile() {
+        return imageFile;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 
     public String getLanguage() {
@@ -162,39 +140,21 @@ public class Courses {
         this.instructor = instructor;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
     // define toString method
     @Override
     public String toString() {
-        return "Courses{" +
+        return "CoursesDto{" +
                 "id=" + id +
                 ", courseCategories=" + courseCategories +
                 ", courseTitle='" + courseTitle + '\'' +
                 ", description='" + description + '\'' +
                 ", ratings=" + ratings +
-                ", image='" + image + '\'' +
+                ", imageFile=" + imageFile +
                 ", language='" + language + '\'' +
                 ", subTitle='" + subTitle + '\'' +
                 ", cost=" + cost +
                 ", courseOutcome='" + courseOutcome + '\'' +
                 ", instructor=" + instructor +
-                ", created=" + created +
-                ", modified=" + modified +
                 '}';
     }
 
