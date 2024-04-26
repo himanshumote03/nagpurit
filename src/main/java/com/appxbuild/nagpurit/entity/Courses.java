@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -56,11 +57,17 @@ public class Courses {
     @OneToMany(mappedBy = "courses")
     private List<MyCourses> myCourses;
 
+    @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("courses")
+    private List<Section> section;
+
     // define constructor
     public Courses(){
 
     }
-    public Courses(String courseTitle, String description, Double ratings, String image, String language, String subTitle, int cost, String courseOutcome, LocalDateTime created, LocalDateTime modified) {
+
+    public Courses(CourseCategories courseCategories, String courseTitle, String description, Double ratings, String image, String language, String subTitle, int cost, String courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<Section> sections) {
+        this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
         this.description = description;
         this.ratings = ratings;
@@ -69,8 +76,10 @@ public class Courses {
         this.subTitle = subTitle;
         this.cost = cost;
         this.courseOutcome = courseOutcome;
+        this.instructor = instructor;
         this.created = created;
         this.modified = modified;
+        this.section = section;
     }
 
     // define getter/setter
@@ -178,6 +187,14 @@ public class Courses {
         this.modified = modified;
     }
 
+    public List<Section> getSection() {
+        return section;
+    }
+
+    public void setSection(List<Section> section) {
+        this.section = section;
+    }
+
     // define toString method
     @Override
     public String toString() {
@@ -195,7 +212,8 @@ public class Courses {
                 ", instructor=" + instructor +
                 ", created=" + created +
                 ", modified=" + modified +
+                ", myCourses=" + myCourses +
+                ", section=" + section +
                 '}';
     }
-
 }

@@ -185,17 +185,31 @@ CREATE TABLE `courses` (
 
 
 --
--- Table structure for table `course_videos``
+-- Table structure for table `section`
 --
-DROP TABLE IF EXISTS `course_videos`;
-CREATE TABLE `course_videos` (
+DROP TABLE IF EXISTS `section`;
+CREATE TABLE `section` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `course_id` INT DEFAULT NULL,
   `section_name` VARCHAR(255) DEFAULT NULL,
-  `video_url` VARCHAR(512) DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` DATETIME NULL DEFAULT NULL,
   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `course_videos``
+--
+DROP TABLE IF EXISTS `videos`;
+CREATE TABLE `videos` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `section_id` INT DEFAULT NULL,
+  `title` VARCHAR(255) DEFAULT NULL,
+  `video_url` VARCHAR(512) DEFAULT NULL,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` DATETIME NULL DEFAULT NULL,
+  FOREIGN KEY (`section_id`) REFERENCES `section`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
