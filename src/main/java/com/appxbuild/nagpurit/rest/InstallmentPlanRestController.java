@@ -3,12 +3,10 @@ package com.appxbuild.nagpurit.rest;
 import com.appxbuild.nagpurit.entity.InstallmentPlan;
 import com.appxbuild.nagpurit.service.InstallmentPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")

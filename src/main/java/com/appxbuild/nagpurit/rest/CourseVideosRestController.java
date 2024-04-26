@@ -1,7 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
 import com.appxbuild.nagpurit.entity.CourseVideos;
-import com.appxbuild.nagpurit.entity.Fields;
 import com.appxbuild.nagpurit.service.CourseVideosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,12 +21,12 @@ public class CourseVideosRestController {
         this.courseVideosService = courseVideosService;
     }
 
-    @GetMapping("/video")
+    @GetMapping("/courseVideo")
     public List<CourseVideos> findAll() {
         return courseVideosService.findAll();
     }
 
-    @GetMapping("/video/{id}")
+    @GetMapping("/courseVideo/{id}")
     public CourseVideos findById(@PathVariable int id) {
         CourseVideos courseVideos = courseVideosService.findById(id);
         if(courseVideos==null){
@@ -36,7 +35,7 @@ public class CourseVideosRestController {
         return courseVideos;
     }
 
-    @GetMapping("/video/play/{id}")
+    @GetMapping("/courseVideo/play/{id}")
     public ResponseEntity<?> getVideoById(@PathVariable int id) {
         CourseVideos video = courseVideosService.findById(id);
         if (video == null) {
@@ -51,7 +50,7 @@ public class CourseVideosRestController {
                 .build();
     }
 
-    @PostMapping("/video")
+    @PostMapping("/courseVideo")
     public CourseVideos addCourseVideo(@RequestBody CourseVideos courseVideos) {
         courseVideos.setId(0);
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -61,7 +60,7 @@ public class CourseVideosRestController {
         return newCourseVideos;
     }
 
-    @PutMapping("/video")
+    @PutMapping("/courseVideo")
     public CourseVideos updateCourseVideo(@RequestBody CourseVideos courseVideos){
         LocalDateTime localDateTime = LocalDateTime.now();
         courseVideos.setModified(localDateTime);
@@ -69,7 +68,7 @@ public class CourseVideosRestController {
         return newCourseVideos;
     }
 
-    @DeleteMapping("video/{id}")
+    @DeleteMapping("courseVideo/{id}")
     public String deleteCourseVideo(@PathVariable int id){
         CourseVideos courseVideos = courseVideosService.findById(id);
         if(courseVideos==null){

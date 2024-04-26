@@ -46,7 +46,7 @@ public class InstructorRestController {
     }
 
     // add mapping GET("/instructor/{id}/image") to get Instructor image
-    @GetMapping("/instructor/{id}/image")
+    @GetMapping("/instructor/image/{id}")
     public ResponseEntity<byte[]> getInstructorImage(@PathVariable int id) throws IOException {
         Optional<Instructor> theInstructor = instructorDao.findById(id);
         if (theInstructor.isPresent()) {

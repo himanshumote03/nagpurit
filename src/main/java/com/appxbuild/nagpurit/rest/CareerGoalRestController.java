@@ -49,8 +49,10 @@ public class CareerGoalRestController {
     // add mapping POST("/careerGoal") to update an existing CareerGoal
     @PutMapping("/careerGoal")
     public CareerGoal updateCareerGoal(@RequestBody CareerGoal theCareerGoal){
+
         LocalDateTime localDateTime = LocalDateTime.now();
         theCareerGoal.setModified(localDateTime);
+
         CareerGoal newCareerGoal = careerGoalService.save(theCareerGoal);
         return newCareerGoal;
     }
