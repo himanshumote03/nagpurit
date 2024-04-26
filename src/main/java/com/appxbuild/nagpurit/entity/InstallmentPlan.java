@@ -3,6 +3,7 @@ package com.appxbuild.nagpurit.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "installment_plan")
@@ -14,8 +15,8 @@ public class InstallmentPlan {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "no_of_months")
-    private int noOfMonths;
+    @Column(name = "month")
+    private int month;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -23,11 +24,14 @@ public class InstallmentPlan {
     @Column(name = "modified")
     private LocalDateTime modified;
 
+    @OneToMany(mappedBy = "installmentPlan")
+    private List<Transactions> transactions;
+
     // constructor
     public InstallmentPlan() {}
 
-    public InstallmentPlan(int noOfMonths, LocalDateTime created, LocalDateTime modified) {
-        this.noOfMonths = noOfMonths;
+    public InstallmentPlan(int month, LocalDateTime created, LocalDateTime modified) {
+        this.month = month;
         this.created = created;
         this.modified = modified;
     }
@@ -41,12 +45,12 @@ public class InstallmentPlan {
         this.id = id;
     }
 
-    public int getNoOfMonths() {
-        return noOfMonths;
+    public int getNoOfMonth() {
+        return month;
     }
 
-    public void setNoOfMonths(int noOfMonths) {
-        this.noOfMonths = noOfMonths;
+    public void month(int month) {
+        this.month = month;
     }
 
     public LocalDateTime getCreated() {
@@ -71,7 +75,7 @@ public class InstallmentPlan {
     public String toString() {
         return "InstallmentPlan{" +
                 "id=" + id +
-                ", noOfMonths=" + noOfMonths +
+                ", month=" + month +
                 ", created=" + created +
                 ", modified=" + modified +
                 '}';
