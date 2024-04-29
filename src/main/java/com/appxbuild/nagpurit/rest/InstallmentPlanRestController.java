@@ -53,6 +53,7 @@ public class InstallmentPlanRestController {
             throw new RuntimeException("Installment plan with id " + installmentPlan.getId() + " not found");
         }
         installmentPlan.setCreated(existinginstallmentPlan.getCreated());
+
         LocalDateTime dt = LocalDateTime.now();
         installmentPlan.setModified(dt);
 

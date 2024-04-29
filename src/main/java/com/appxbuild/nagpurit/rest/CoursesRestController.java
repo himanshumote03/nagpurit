@@ -148,8 +148,8 @@ public class CoursesRestController {
             existingCourse.setCost(coursesDto.getCost());
             existingCourse.setCourseOutcome(coursesDto.getCourseOutcome());
             existingCourse.setInstructor(coursesDto.getInstructor());
-            existingCourse.setCreated(localDateTime);
-            existingCourse.setModified(null);
+            existingCourse.setCreated(existingCourse.getCreated());
+            existingCourse.setModified(localDateTime);
             coursesDao.save(existingCourse);
 
             // Handle imageFile if provided
