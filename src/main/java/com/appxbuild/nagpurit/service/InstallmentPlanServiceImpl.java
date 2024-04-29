@@ -1,7 +1,6 @@
 package com.appxbuild.nagpurit.service;
 
 import com.appxbuild.nagpurit.dao.InstallmentPlanDao;
-import com.appxbuild.nagpurit.entity.CourseVideos;
 import com.appxbuild.nagpurit.entity.InstallmentPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
