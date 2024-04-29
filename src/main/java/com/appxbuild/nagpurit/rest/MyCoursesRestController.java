@@ -1,6 +1,5 @@
 package com.appxbuild.nagpurit.rest;
 
-import com.appxbuild.nagpurit.entity.CheckIn;
 import com.appxbuild.nagpurit.entity.MyCourses;
 import com.appxbuild.nagpurit.service.MyCoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MyCoursesRestController {
 
     private MyCoursesService myCoursesService;
