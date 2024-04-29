@@ -38,6 +38,7 @@ public class MyCoursesRestController {
         return theMyCourses;
     }
 
+
     @GetMapping("/myCourses/login/{loginId}")
     public ResponseEntity<List<MyCourses>> getMyCoursesByLoginId(@PathVariable int loginId) {
         List<MyCourses> theMyCourses = myCoursesService.findAll()
