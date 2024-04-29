@@ -1,12 +1,15 @@
 package com.appxbuild.nagpurit.rest;
 
+import com.appxbuild.nagpurit.entity.CheckIn;
 import com.appxbuild.nagpurit.entity.MyCourses;
 import com.appxbuild.nagpurit.service.MyCoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +36,15 @@ public class MyCoursesRestController {
             throw new RuntimeException("My Course is not found " + id);
         }
         return theMyCourses;
+    }
+
+    @GetMapping("/myCourses/login/{loginId}")
+    public ResponseEntity<List<MyCourses>> getMyCoursesByLoginId(@PathVariable int loginId) {
+        List<MyCourses> theMyCourses = myCoursesService.findAll()
+                .stream()
+                .filter(myCourses -> myCourses.getLoginDetails() != null && myCourses.getLoginDetails().getId() == loginId)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(theMyCourses);
     }
 
     // add mapping POST("/myCourses) to add a MyCourses
