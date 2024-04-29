@@ -13,11 +13,13 @@ public class Reviews {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "login_id")
-    private int loginId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "login_id", referencedColumnName = "id")
+    private LoginDetails loginDetails;
 
-    @Column(name = "course_id")
-    private int courseId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private Courses courses;
 
     @Column(name = "message")
     private String message;
@@ -29,9 +31,7 @@ public class Reviews {
     public Reviews() {
     }
 
-    public Reviews( int loginId, int courseId, String message, LocalDateTime created) {
-        this.loginId = loginId;
-        this.courseId = courseId;
+    public Reviews( String message, LocalDateTime created) {
         this.message = message;
         this.created = created;
     }
@@ -44,20 +44,20 @@ public class Reviews {
         this.id = id;
     }
 
-    public int getLoginId() {
-        return loginId;
+    public LoginDetails getLoginDetails() {
+        return loginDetails;
     }
 
-    public void setLoginId(int loginId) {
-        this.loginId = loginId;
+    public void setLoginDetails(LoginDetails loginDetails) {
+        this.loginDetails = loginDetails;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public Courses getCourses() {
+        return courses;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setCourses(Courses courses) {
+        this.courses = courses;
     }
 
     public String getMessage() {
@@ -81,8 +81,8 @@ public class Reviews {
     public String toString() {
         return "Reviews{" +
                 "id=" + id +
-                ", loginId=" + loginId +
-                ", courseId=" + courseId +
+                ", loginDetails=" + loginDetails +
+                ", courses=" + courses +
                 ", message='" + message + '\'' +
                 ", created=" + created +
                 '}';

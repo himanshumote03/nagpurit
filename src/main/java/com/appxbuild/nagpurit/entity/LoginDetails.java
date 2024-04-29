@@ -36,6 +36,10 @@ public class LoginDetails {
     @OneToMany(mappedBy = "loginDetails")
     private List<Transactions> transactions;
 
+    @OneToMany(mappedBy = "loginDetails")
+    private List<Reviews> reviews;
+
+
     // Constructor
     public LoginDetails() {}
 

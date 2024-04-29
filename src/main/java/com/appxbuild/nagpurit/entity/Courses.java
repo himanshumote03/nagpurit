@@ -61,6 +61,9 @@ public class Courses {
     @JsonIgnoreProperties("courses")
     private List<Section> section;
 
+    @OneToMany(mappedBy = "courses")
+    private List<Reviews> reviews;
+
     // define constructor
     public Courses(){
 

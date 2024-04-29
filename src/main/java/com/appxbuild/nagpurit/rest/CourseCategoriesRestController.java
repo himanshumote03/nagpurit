@@ -24,6 +24,15 @@ public class CourseCategoriesRestController {
         return courseCategoriesService.findAll();
     }
 
+    @GetMapping("/courseCategories/{id}")
+    public CourseCategories getCourseCategoriesById(@PathVariable int id) {
+        CourseCategories courseCategories = courseCategoriesService.findById(id);
+        if (courseCategories == null) {
+            throw new RuntimeException("courseCategories id is not found " + id);
+        }
+        return courseCategories;
+    }
+
     @PostMapping("/courseCategories")
     public CourseCategories addCheckIn(@RequestBody CourseCategories courseCategories) {
 //        courseCategories.setId(0);

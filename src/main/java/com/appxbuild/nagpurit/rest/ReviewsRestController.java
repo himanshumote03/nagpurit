@@ -1,12 +1,17 @@
 package com.appxbuild.nagpurit.rest;
 
+import com.appxbuild.nagpurit.entity.CareerGoal;
 import com.appxbuild.nagpurit.entity.Reviews;
+import com.appxbuild.nagpurit.entity.User;
 import com.appxbuild.nagpurit.service.ReviewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -22,6 +27,26 @@ public class ReviewsRestController {
     @GetMapping("/reviews")
     public List<Reviews> findAll(){
         return reviewsService.findAll();
+    }
+
+    @GetMapping("/reviews/{id}")
+    public Reviews getReviews(@PathVariable int id){
+        Reviews theReviews = reviewsService.findById(id);
+        if (theReviews==null){
+            throw new RuntimeException("Reviews id is not found " + id);
+        }
+        return theReviews;
+    }
+
+    @GetMapping("/reviews/login/{loginId}")
+    public ResponseEntity<Reviews> getUserByLoginId(@PathVariable int loginId) {
+        Optional<Reviews> reviews = reviewsService.findAll()
+                .stream()
+                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
+                .findFirst();
+
+        return reviews.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/reviews")
