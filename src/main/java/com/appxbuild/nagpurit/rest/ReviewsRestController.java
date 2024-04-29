@@ -1,8 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
-import com.appxbuild.nagpurit.entity.CareerGoal;
 import com.appxbuild.nagpurit.entity.Reviews;
-import com.appxbuild.nagpurit.entity.User;
 import com.appxbuild.nagpurit.service.ReviewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ReviewsRestController {
 
     private ReviewsService reviewsService;
