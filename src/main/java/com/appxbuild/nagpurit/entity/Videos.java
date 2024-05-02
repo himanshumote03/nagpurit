@@ -21,8 +21,14 @@ public class Videos {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "type")
+    private String type;
+
     @Column(name = "video_url")
     private String videoUrl;
+
+    @Column(name = "duration")
+    private String duration;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -31,13 +37,14 @@ public class Videos {
     private LocalDateTime modified;
 
     // constructors, getters, and setters
-    public Videos(){
+    public Videos(){}
 
-    }
-    public Videos(Section section, String title, String videoUrl, LocalDateTime created, LocalDateTime modified) {
+    public Videos(Section section, String title, String type, String videoUrl, String duration, LocalDateTime created, LocalDateTime modified) {
         this.section = section;
         this.title = title;
+        this.type = type;
         this.videoUrl = videoUrl;
+        this.duration = duration;
         this.created = created;
         this.modified = modified;
     }
@@ -67,12 +74,28 @@ public class Videos {
         this.title = title;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getVideoUrl() {
         return videoUrl;
     }
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public LocalDateTime getCreated() {

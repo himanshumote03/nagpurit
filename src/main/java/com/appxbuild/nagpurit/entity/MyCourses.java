@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 public class MyCourses {
 
     // define fields
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
