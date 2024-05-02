@@ -24,7 +24,6 @@ public class LoginDetailsRestController {
         this.loginDetailsService = loginDetailsService;
     }
 
-
     @GetMapping("/loginDetails")
     public List<LoginDetails> findAll(){
         return loginDetailsService.findAll();
