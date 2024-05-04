@@ -259,6 +259,22 @@ CREATE TABLE `cart` (
   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+
+--
+-- Table structure for table `favourite`
+--
+DROP TABLE IF EXISTS `favourite`;
+CREATE TABLE `favourite` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `login_id` INT DEFAULT NULL,
+  `course_id` INT DEFAULT NULL,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` DATETIME NULL DEFAULT NULL,
+  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
 --
 -- Table structure for table `installment_plan`
 --
