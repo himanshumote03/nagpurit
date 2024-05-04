@@ -3,6 +3,8 @@ package com.appxbuild.nagpurit.rest;
 import com.appxbuild.nagpurit.entity.LoginDetails;
 import com.appxbuild.nagpurit.security.AESEncryption;
 import com.appxbuild.nagpurit.service.LoginDetailsService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LoginDetailsRestController {
     private LoginDetailsService loginDetailsService;
 
@@ -21,7 +23,6 @@ public class LoginDetailsRestController {
     public LoginDetailsRestController(LoginDetailsService loginDetailsService) {
         this.loginDetailsService = loginDetailsService;
     }
-
 
     @GetMapping("/loginDetails")
     public List<LoginDetails> findAll(){
@@ -95,7 +96,7 @@ public class LoginDetailsRestController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDetails loginDetails) {
+    public ResponseEntity<?> login(@RequestBody LoginDetails loginDetails) {
         LoginDetails user = loginDetailsService.findByEmail(loginDetails.getEmail());
 //        System.out.println("\n Existing details: " + user.getEmail() + " : " + user.getPassword());
 //        System.out.println("\n email: " + loginDetails.getEmail() + "\n pass:  " + loginDetails.getPassword());
@@ -103,9 +104,13 @@ public class LoginDetailsRestController {
             String decryptedPwd = AESEncryption.decrypt(user.getPassword());
 //            System.out.println("Decrypted Pass: " + decryptedPwd);
             if (decryptedPwd.equals(loginDetails.getPassword())) {
-                return ResponseEntity.ok("Login successful.");
+                System.out.println(user);
+                System.out.println(user.getName());
+                return ResponseEntity.ok(user);
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
+        // return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
+        String errorMessage = "Invalid email or password.";
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
     }
 }

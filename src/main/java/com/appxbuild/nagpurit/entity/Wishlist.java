@@ -5,9 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "my_courses")
-public class MyCourses {
-
+@Table(name = "wishlist")
+public class Wishlist {
     // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,30 +28,30 @@ public class MyCourses {
     @Column(name = "modified")
     private LocalDateTime modified;
 
-    // define constructor
-    public MyCourses(){
-
+    // constructor
+    public Wishlist() {
     }
-    public MyCourses(LocalDateTime created, LocalDateTime modified) {
+
+    public Wishlist(LocalDateTime created, LocalDateTime modified) {
         this.created = created;
         this.modified = modified;
     }
 
-    // define getter/setter
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    // getter and setter
     public LoginDetails getLoginDetails() {
         return loginDetails;
     }
 
     public void setLoginDetails(LoginDetails loginDetails) {
         this.loginDetails = loginDetails;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Courses getCourses() {
@@ -79,10 +78,10 @@ public class MyCourses {
         this.modified = modified;
     }
 
-    // define toString method
+    // toString()
     @Override
     public String toString() {
-        return "MyCourses{" +
+        return "Wishlist{" +
                 "id=" + id +
                 ", loginDetails=" + loginDetails +
                 ", courses=" + courses +
@@ -90,5 +89,4 @@ public class MyCourses {
                 ", modified=" + modified +
                 '}';
     }
-
 }

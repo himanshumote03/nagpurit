@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
+import com.appxbuild.nagpurit.entity.AccountDeletionMsg;
 import com.appxbuild.nagpurit.entity.Fields;
 import com.appxbuild.nagpurit.service.FieldsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FieldsRestController {
 
     private FieldsService fieldsService;
@@ -49,6 +51,13 @@ public class FieldsRestController {
     // add mapping PUT("/fields") to update an existing Field
     @PutMapping("/fields")
     public Fields updateField(@RequestBody Fields thefields){
+        Fields existingFields = fieldsService.findById(thefields.getId());
+
+        if (existingFields == null) {
+            throw new RuntimeException("Login Detail with id " + thefields.getId() + " not found");
+        }
+        thefields.setCreated(existingFields.getCreated());
+
         LocalDateTime localDateTime = LocalDateTime.now();
         thefields.setModified(localDateTime);
         Fields newField = fieldsService.save(thefields);

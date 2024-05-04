@@ -1,6 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
-import com.appxbuild.nagpurit.entity.CheckIn;
+import com.appxbuild.nagpurit.entity.AccountDeletionMsg;
 import com.appxbuild.nagpurit.entity.MyCourses;
 import com.appxbuild.nagpurit.service.MyCoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MyCoursesRestController {
 
     private MyCoursesService myCoursesService;
@@ -62,6 +63,13 @@ public class MyCoursesRestController {
     // add mapping PUT("/myCourses) to update an existing MyCourses
     @PutMapping("/myCourses")
     public MyCourses updateMyCourse(@RequestBody MyCourses theMyCourses){
+        MyCourses existingMyCourses = myCoursesService.findById(theMyCourses.getId());
+
+        if (existingMyCourses == null) {
+            throw new RuntimeException("Login Detail with id " + theMyCourses.getId() + " not found");
+        }
+        theMyCourses.setCreated(existingMyCourses.getCreated());
+
         LocalDateTime localDateTime = LocalDateTime.now();
         theMyCourses.setModified(localDateTime);
         MyCourses newMyCourses = myCoursesService.save(theMyCourses);

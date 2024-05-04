@@ -199,14 +199,16 @@ CREATE TABLE `section` (
 
 
 --
--- Table structure for table `course_videos``
+-- Table structure for table `videos`
 --
 DROP TABLE IF EXISTS `videos`;
 CREATE TABLE `videos` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `section_id` INT DEFAULT NULL,
   `title` VARCHAR(255) DEFAULT NULL,
+  `type` VARCHAR(45) DEFAULT NULL,
   `video_url` VARCHAR(512) DEFAULT NULL,
+  `duration` VARCHAR(45) DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` DATETIME NULL DEFAULT NULL,
   FOREIGN KEY (`section_id`) REFERENCES `section`(`id`)
@@ -218,6 +220,51 @@ CREATE TABLE `videos` (
 --
 DROP TABLE IF EXISTS `my_courses`;
 CREATE TABLE `my_courses` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `login_id` INT DEFAULT NULL,
+  `course_id` INT DEFAULT NULL,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` DATETIME NULL DEFAULT NULL,
+  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `wishlist`
+--
+DROP TABLE IF EXISTS `wishlist`;
+CREATE TABLE `wishlist` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `login_id` INT DEFAULT NULL,
+  `course_id` INT DEFAULT NULL,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` DATETIME NULL DEFAULT NULL,
+  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `cart`
+--
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `login_id` INT DEFAULT NULL,
+  `course_id` INT DEFAULT NULL,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` DATETIME NULL DEFAULT NULL,
+  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+--
+-- Table structure for table `favourite`
+--
+DROP TABLE IF EXISTS `favourite`;
+CREATE TABLE `favourite` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `login_id` INT DEFAULT NULL,
   `course_id` INT DEFAULT NULL,

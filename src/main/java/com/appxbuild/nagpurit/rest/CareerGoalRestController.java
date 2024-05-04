@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
+import com.appxbuild.nagpurit.entity.AccountDeletionMsg;
 import com.appxbuild.nagpurit.entity.CareerGoal;
 import com.appxbuild.nagpurit.service.CareerGoalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CareerGoalRestController {
 
     private CareerGoalService careerGoalService;
@@ -49,6 +51,13 @@ public class CareerGoalRestController {
     // add mapping POST("/careerGoal") to update an existing CareerGoal
     @PutMapping("/careerGoal")
     public CareerGoal updateCareerGoal(@RequestBody CareerGoal theCareerGoal){
+
+        CareerGoal existingCareerGoal = careerGoalService.findById(theCareerGoal.getId());
+
+        if (existingCareerGoal == null) {
+            throw new RuntimeException("Login Detail with id " + theCareerGoal.getId() + " not found");
+        }
+        theCareerGoal.setCreated(existingCareerGoal.getCreated());
 
         LocalDateTime localDateTime = LocalDateTime.now();
         theCareerGoal.setModified(localDateTime);

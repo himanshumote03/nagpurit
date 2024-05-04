@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class InstallmentPlanRestController {
 
     private InstallmentPlanService installmentPlanService;
@@ -52,6 +53,7 @@ public class InstallmentPlanRestController {
             throw new RuntimeException("Installment plan with id " + installmentPlan.getId() + " not found");
         }
         installmentPlan.setCreated(existinginstallmentPlan.getCreated());
+
         LocalDateTime dt = LocalDateTime.now();
         installmentPlan.setModified(dt);
 
