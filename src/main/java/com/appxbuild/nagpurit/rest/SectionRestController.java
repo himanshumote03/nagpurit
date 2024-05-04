@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
+import com.appxbuild.nagpurit.entity.Fields;
 import com.appxbuild.nagpurit.entity.Section;
 import com.appxbuild.nagpurit.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,13 @@ public class SectionRestController {
     // add mapping PUT("/section") to update an existing of Section
     @PutMapping("/section")
     public Section updateSection(@RequestBody Section theSection){
+        Section existingSection = sectionService.findById(theSection.getId());
+
+        if (existingSection == null) {
+            throw new RuntimeException("Section with id " + theSection.getId() + " not found");
+        }
+        theSection.setCreated(existingSection.getCreated());
+
         LocalDateTime localDateTime = LocalDateTime.now();
         theSection.setModified(localDateTime);
         Section newSection = sectionService.save(theSection);

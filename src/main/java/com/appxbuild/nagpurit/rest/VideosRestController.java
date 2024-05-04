@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
+import com.appxbuild.nagpurit.entity.Section;
 import com.appxbuild.nagpurit.entity.Videos;
 import com.appxbuild.nagpurit.service.VideosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,13 @@ public class VideosRestController {
     // add mapping PUT("/videos") to update an existing Video
     @PutMapping("/videos")
     public Videos updateVideo(@RequestBody Videos theVideo){
+        Videos existingVideos = videosService.findById(theVideo.getId());
+
+        if (existingVideos == null) {
+            throw new RuntimeException("Videos with id " + theVideo.getId() + " not found");
+        }
+        theVideo.setCreated(existingVideos.getCreated());
+
         LocalDateTime localDateTime = LocalDateTime.now();
         theVideo.setModified(localDateTime);
         Videos newVideo  = videosService.save(theVideo);
