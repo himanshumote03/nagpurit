@@ -1,6 +1,7 @@
 package com.appxbuild.nagpurit.rest;
 
 import com.appxbuild.nagpurit.dao.CoursesDao;
+import com.appxbuild.nagpurit.driveService.CourseService;
 import com.appxbuild.nagpurit.dto.CoursesDto;
 import com.appxbuild.nagpurit.entity.Courses;
 import jakarta.validation.Valid;
@@ -12,10 +13,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,11 +29,14 @@ import java.util.Optional;
 public class CoursesRestController {
 
     private CoursesDao coursesDao;
+    private CourseService courseService;
 
     @Autowired
-    public CoursesRestController(CoursesDao theCoursesDao){
-        coursesDao = theCoursesDao;
+    public CoursesRestController(CoursesDao coursesDao, CourseService courseService) {
+        this.coursesDao = coursesDao;
+        this.courseService = courseService;
     }
+
 
     // add mapping GET("/courses") to get a list of Courses
     @GetMapping("/courses")
@@ -66,123 +72,122 @@ public class CoursesRestController {
     @PostMapping("/courses")
     public ResponseEntity<String> addCourse(
             @Valid @ModelAttribute CoursesDto coursesDto,
-            @RequestParam("imageFile") MultipartFile imageFile,
-            BindingResult result){
+            @RequestParam("image") MultipartFile image,
+            BindingResult result
+    ) throws IOException, GeneralSecurityException {
         if (result.hasErrors()) {
             return new ResponseEntity<>("The request body contains validation errors", HttpStatus.BAD_REQUEST);
         }
 
         // Save image file
-        if (imageFile.isEmpty()) {
+        if (image.isEmpty()) {
             return new ResponseEntity<>("Image file is required", HttpStatus.BAD_REQUEST);
         }
 
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String storageFileName = localDateTime.getMinute() + "_" + imageFile.getOriginalFilename();
-
         try {
-            String uploadDir = "public/images/";
-            Path uploadPath = Paths.get(uploadDir);
+            // Upload image to Google Drive and get image URL
+            File tempFile = File.createTempFile("course", null);
+            image.transferTo(tempFile);
+            String imageUrl = courseService.uploadImageToDrive(tempFile);
 
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
+            if (imageUrl == null || imageUrl.isEmpty()) {
+                return new ResponseEntity<>("Failed to upload image to Google Drive", HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
-            try (var inputStream = imageFile.getInputStream()) {
-                Files.copy(inputStream, Paths.get(uploadDir + storageFileName));
-            }
-        } catch (IOException ex) {
-            return new ResponseEntity<>("Failed to save image file: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            // Create a new User entity and set user details
+
+            Courses courses = new Courses();
+            courses.setId(coursesDto.getId());
+            courses.setImage(imageUrl);  // Set the image URL
+            courses.setCourseCategories(coursesDto.getCourseCategories());
+            courses.setCourseTitle(coursesDto.getCourseTitle());
+            courses.setDescription(coursesDto.getDescription());
+            courses.setRatings(coursesDto.getRatings());
+            courses.setLanguage(coursesDto.getLanguage());
+            courses.setSubTitle(coursesDto.getSubTitle());
+            courses.setCost(coursesDto.getCost());
+            courses.setCourseOutcome(coursesDto.getCourseOutcome());
+            courses.setInstructor(coursesDto.getInstructor());
+            courses.setCreated(LocalDateTime.now());
+            courses.setModified(null);
+
+            // save course to database
+            coursesDao.save(courses);
+
+            return new ResponseEntity<>("Course added successfully", HttpStatus.CREATED);
+
+        } catch (IOException e) {
+            return new ResponseEntity<>("Error processing image upload: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        // create and save course
-
-        Courses courses = new Courses();
-        courses.setId(coursesDto.getId());
-        courses.setImage(storageFileName);
-        courses.setCourseCategories(coursesDto.getCourseCategories());
-        courses.setCourseTitle(coursesDto.getCourseTitle());
-        courses.setDescription(coursesDto.getDescription());
-        courses.setRatings(coursesDto.getRatings());
-        courses.setLanguage(coursesDto.getLanguage());
-        courses.setSubTitle(coursesDto.getSubTitle());
-        courses.setCost(coursesDto.getCost());
-        courses.setCourseOutcome(coursesDto.getCourseOutcome());
-        courses.setInstructor(coursesDto.getInstructor());
-        courses.setCreated(localDateTime);
-        courses.setModified(null);
-        coursesDao.save(courses);
-
-        return new ResponseEntity<>("Course added successfully", HttpStatus.CREATED);
     }
 
 
-    // add mapping PUT("/courses/{id}") to update an existing Course
-    @PutMapping("/courses/{id}")
+    // add mapping PUT("/courses") to update an existing Course
+    @PutMapping("/courses")
     public ResponseEntity<String> updateCourse(
-            @PathVariable int id,
-            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+            @RequestParam(value = "image", required = false) MultipartFile image,
             @Valid @ModelAttribute CoursesDto coursesDto,
             BindingResult result
-    ) {
+    ) throws IOException, GeneralSecurityException {
 
+        Integer courseId = coursesDto.getId();
         if (result.hasErrors()) {
             return new ResponseEntity<>("The request body contains validation errors", HttpStatus.BAD_REQUEST);
         }
 
-        Optional<Courses> theCourses = coursesDao.findById(id);
-        if (theCourses.isPresent()) {
-            Courses existingCourse = theCourses.get();
-            LocalDateTime localDateTime = LocalDateTime.now();
-            String storageFileName = localDateTime.getMinute() + "_" + imageFile.getOriginalFilename();
-
-            // Update course information
-            existingCourse.setId(coursesDto.getId());
-            existingCourse.setImage(storageFileName);
-            existingCourse.setCourseCategories(coursesDto.getCourseCategories());
-            existingCourse.setCourseTitle(coursesDto.getCourseTitle());
-            existingCourse.setDescription(coursesDto.getDescription());
-            existingCourse.setRatings(coursesDto.getRatings());
-            existingCourse.setLanguage(coursesDto.getLanguage());
-            existingCourse.setSubTitle(coursesDto.getSubTitle());
-            existingCourse.setCost(coursesDto.getCost());
-            existingCourse.setCourseOutcome(coursesDto.getCourseOutcome());
-            existingCourse.setInstructor(coursesDto.getInstructor());
-            existingCourse.setCreated(existingCourse.getCreated());
-            existingCourse.setModified(localDateTime);
-            coursesDao.save(existingCourse);
-
-            // Handle imageFile if provided
-            if (imageFile != null && !imageFile.isEmpty()) {
-                try {
-                    String uploadDir = "public/images/";
-                    Path uploadPath = Paths.get(uploadDir);
-
-                    if (!Files.exists(uploadPath)) {
-                        Files.createDirectories(uploadPath);
-                    }
-
-                    // Delete old image file
-                    if (existingCourse.getImage() != null) {
-                        Path oldImagePath = Paths.get(uploadDir + existingCourse.getImage());
-                        Files.deleteIfExists(oldImagePath);
-                    }
-
-                    // Save new image file
-                    String storageFile = localDateTime.getMinute() + "_" + imageFile.getOriginalFilename();
-                    Path filePath = Paths.get(uploadDir + storageFile);
-                    Files.copy(imageFile.getInputStream(), filePath);
-                    existingCourse.setImage(storageFile);
-                } catch (IOException ex) {
-                    return new ResponseEntity<>("Failed to upload image file: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
-
-            coursesDao.save(existingCourse);
-            return new ResponseEntity<>("Course updated successfully", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Course id is not found", HttpStatus.NOT_FOUND);
+        // Check if the Course ID is provided
+        if (courseId == null) {
+            return new ResponseEntity<>("Course ID is required for updating", HttpStatus.BAD_REQUEST);
         }
+
+        Optional<Courses> optionalCourses = coursesDao.findById(coursesDto.getId());
+
+        if (optionalCourses.isEmpty()) {
+            return new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
+        }
+
+        Courses existingCourse = optionalCourses.get();
+
+        // Update course information
+        existingCourse.setId(coursesDto.getId());
+//        existingCourse.setImage(coursesDt);
+        existingCourse.setCourseCategories(coursesDto.getCourseCategories());
+        existingCourse.setCourseTitle(coursesDto.getCourseTitle());
+        existingCourse.setDescription(coursesDto.getDescription());
+        existingCourse.setRatings(coursesDto.getRatings());
+        existingCourse.setLanguage(coursesDto.getLanguage());
+        existingCourse.setSubTitle(coursesDto.getSubTitle());
+        existingCourse.setCost(coursesDto.getCost());
+        existingCourse.setCourseOutcome(coursesDto.getCourseOutcome());
+        existingCourse.setInstructor(coursesDto.getInstructor());
+        existingCourse.setCreated(existingCourse.getCreated());
+
+        coursesDao.save(existingCourse);
+        // Handle imageFile if provided
+        if (image != null && !image.isEmpty()) {
+            try {
+                File tempFile = File.createTempFile("course", null);
+                image.transferTo(tempFile);
+                String imageUrl = courseService.uploadImageToDrive(tempFile);
+
+                if (imageUrl == null || imageUrl.isEmpty()) {
+                    return new ResponseEntity<>("Failed to upload image to Google Drive", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+                // Update course image URL
+                existingCourse.setImage(imageUrl);
+            } catch (IOException ex) {
+                return new ResponseEntity<>("Error processing image upload: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        // Update modified timestamp
+        existingCourse.setModified(LocalDateTime.now());
+
+        // Save updated instructor
+        coursesDao.save(existingCourse);
+
+        return new ResponseEntity<>("Course updated successfully", HttpStatus.OK);
     }
 
 
