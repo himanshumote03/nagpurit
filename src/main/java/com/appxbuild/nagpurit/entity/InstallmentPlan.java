@@ -15,8 +15,8 @@ public class InstallmentPlan {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "month")
-    private int month;
+    @Column(name = "no_of_months")
+    private int noOfMonths;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -30,8 +30,8 @@ public class InstallmentPlan {
     // constructor
     public InstallmentPlan() {}
 
-    public InstallmentPlan(int month, LocalDateTime created, LocalDateTime modified) {
-        this.month = month;
+    public InstallmentPlan(int noOfMonths, LocalDateTime created, LocalDateTime modified) {
+        this.noOfMonths = noOfMonths;
         this.created = created;
         this.modified = modified;
     }
@@ -45,12 +45,12 @@ public class InstallmentPlan {
         this.id = id;
     }
 
-    public int getNoOfMonth() {
-        return month;
+    public int getNoOfMonths() {
+        return noOfMonths;
     }
 
-    public void month(int month) {
-        this.month = month;
+    public void setNoOfMonths(int noOfMonths) {
+        this.noOfMonths = noOfMonths;
     }
 
     public LocalDateTime getCreated() {
@@ -75,7 +75,7 @@ public class InstallmentPlan {
     public String toString() {
         return "InstallmentPlan{" +
                 "id=" + id +
-                ", month=" + month +
+                ", month=" + noOfMonths +
                 ", created=" + created +
                 ", modified=" + modified +
                 '}';

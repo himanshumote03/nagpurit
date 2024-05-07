@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "the-education-bank",
+  "private_key_id": "c77e7bf3d5b082b479e55a049f8d813d0e7bded4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDQN6yoXwUPhYY0\nzHXucNuALR9YzI/TqO/wQJ0g2bBaAXmsQMNYMOrRCk7Ul+n1Idu/2vUsaNOc8YCW\ns7GXCmFwhQ5E+bnJGZrD22Ec1qG0TEqmoFwR3NsaU7K9/Er1JmsA7c8GJW2WUVDT\nf2mkiIdiwZXORBCmuVx/jpJH22a9SdnRz+Q6K5XiohpK5H2uIC+fEXsDfRvYe6/M\nv3BG7pfvdlxrfT+cxKoB/reFU89NpmDZ5KjBRYpnFSpOrWdTsnok1JmX6klme3G7\nrkNEReyKo17urxP7LzPhncNcwCHmmHmvyPu2qQsOHJkpepXDkpJMGD3F2J/Rvqvg\nMsFrk7XXAgMBAAECggEABUxGz8DXjggBRWBJuP2JPJ86wN5Oho8x9qMYbd6Nk+bj\nWCAMpAgYbRnGrhPCAzTVQE8aChprRFw4YsAsSuTtLZkfSerqk4kWER79EJaxfVnx\nyFH13/M1IFvoqB4nMEqXUjuMRZyU6p3GhEJrmLhr4XYJ4yMPrttsYHXIUcuQiKoN\nlO/pFXWuYsoI0AMU8xTYCNgomz2c7O6gaZDWvW4AjRPoCNiPzzIdaZhNgPJU7P9+\nsjFQro0NvYXA5yosJ62LByNtprKdfCIYUXMExBhLnqcPEOuSts9JvzcB55RrbNeb\nX3uT8cT9b+us+yCXBCM3xCVsCI/dxYdmYzqxGwKOqQKBgQD/BUXgrntnzjqB2RAD\nZGChpW0F1BvScYY9KhiRcTUllc7o4QXV4tUzUD/r0Afuk6RMLUgnlISXViYogtBL\nNfkHNaeW1IvFEp0PxMPoTDIS3PEFMGwO4o23v9Vq4MvkUOMO7dlmnA3pc5G0iJtF\noaX5WVmXqGrBlM0TYOVcsCnwVQKBgQDRBGLnt0EABYTBZjFVrwE+MXAYKTgzrBxx\nz3DaxjPm6ivA6R/DwOzYHJ/TWIpS6HlJUs0MwhWpRkvgZcaiDLAzAfJe8/O1mp8p\nRjgZwwjFXbwUU/FDrFf9SjWz4KByQekFr7dtNJa0C/Kovo2st+sTuLaqjjYW6N9o\n1nJzq1FJewKBgHv+m1hAXf499pKV8MRFdPqDjXvNAu4ShpuMsT9eVOH+cgknCAhT\n7yew+DN3BbRJkxP63F9qRgGzQIBoAlDfYELSIrcihwb+IuG84Sg8jAhB5uqH/bJL\nE27pViJORLSxY4Upvo+2hskgiRLHbP+xNhsEB5zGpYmUCRZIAZ1Mhke1AoGAA9Vi\nwwE3bfqr7qgjK4EkMrHRboADCd+UPfoiBcEw3oFZABbGgF6feW889zFeiBq/brrY\nC+3bW9lwNtNnCz3UVXspqNgslh4Z4TXqfX54QLZxZqYLfMRCcODVj1EFYFMZJQOO\nB7C5OuAlOTcVfh95bkkrAIHPOChZQKD+RGTV/tUCgYAZVOGPUwXqm8ttnjfCvisT\n305+DXUFPoAZezMKNozd0OsajbqpfWDsL+oO9I0AyZseGVVrtFwhtuuCzD5m33r1\ncnpF1pvf7dh0lsXCngmAcElOWah6BWWuEZWrSt2/DRM/PaaUwAS5yOkQvjkALOcM\n4dDk2OoUa+u3636KjLVNeA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "googledriveupload@the-education-bank.iam.gserviceaccount.com",
+  "client_id": "105815244239518323628",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/googledriveupload%40the-education-bank.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

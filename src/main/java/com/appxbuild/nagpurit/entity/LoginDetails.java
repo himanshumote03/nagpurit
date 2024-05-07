@@ -33,8 +33,8 @@ public class LoginDetails {
     @OneToMany(mappedBy = "loginDetails")
     private List<CareerGoal> careerGoals;
 
-    @OneToMany(mappedBy = "loginDetails")
-    private List<Transactions> transactions;
+//    @OneToMany(mappedBy = "loginDetails")
+//    private List<Transactions> transactions;
 
     @OneToMany(mappedBy = "loginDetails")
     private List<Reviews> reviews;

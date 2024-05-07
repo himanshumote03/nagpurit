@@ -1,7 +1,9 @@
 package com.appxbuild.nagpurit.rest;
 
+import com.appxbuild.nagpurit.entity.MyCourses;
 import com.appxbuild.nagpurit.entity.Transactions;
 import com.appxbuild.nagpurit.entity.User;
+import com.appxbuild.nagpurit.entity.Wishlist;
 import com.appxbuild.nagpurit.service.TransactionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -38,23 +41,24 @@ public class TransactionRestController {
         return transactions;
     }
 
-    @GetMapping("/transactions/login/{loginId}")
-    public ResponseEntity<Transactions> getTransactionsByLoginId(@PathVariable int loginId) {
-        Optional<Transactions> transactions = transactionsService.findAll()
-                .stream()
-                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
-                .findFirst();
 
-        return transactions.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/transactions/login/{loginId}")
+    public ResponseEntity<List<Transactions>> getTransactionsByLoginId(@PathVariable int loginId) {
+        List<Transactions> theTransactions = transactionsService.findAll()
+                .stream()
+                .filter(wishlist -> wishlist.getLoginDetails() != null && wishlist.getLoginDetails().getId() == loginId)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(theTransactions);
     }
 
 
     @PostMapping("/transactions")
     public Transactions addTransactions(@RequestBody Transactions transactions) {
+        transactions.setId(0);
         LocalDateTime dt = LocalDateTime.now();
         transactions.setPaymentDate(dt);
         transactions.setCreated(dt);
+        transactions.setModified(null);
         Transactions newTransactions = transactionsService.save(transactions);
         return newTransactions;
     }
@@ -65,7 +69,7 @@ public class TransactionRestController {
         Transactions existingTransactions = transactionsService.findById(transactions.getId());
 
         if (existingTransactions == null) {
-            throw new RuntimeException("Login Detail with id " + transactions.getId() + " not found");
+            throw new RuntimeException("Transaction with id " + transactions.getId() + " not found");
         }
         transactions.setCreated(existingTransactions.getCreated());
 
