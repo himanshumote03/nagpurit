@@ -32,7 +32,8 @@ public class VideosServiceImpl implements VideosService{
             theVideos = result.get();
         }
         else {
-            throw new RuntimeException("Video id is not found " + theId);
+//            throw new RuntimeException("Video id is not found " + theId);
+            return new Videos();
         }
         return theVideos;
     }

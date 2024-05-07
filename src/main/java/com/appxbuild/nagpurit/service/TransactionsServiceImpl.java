@@ -31,7 +31,8 @@ public class TransactionsServiceImpl implements TransactionsService {
         if (res.isPresent()) {
             transactions = res.get();
         } else {
-            throw new RuntimeException("Transactions id does not found " + theId);
+//            throw new RuntimeException("Transactions id does not found " + theId);
+            return new Transactions();
         }
         return transactions;
     }

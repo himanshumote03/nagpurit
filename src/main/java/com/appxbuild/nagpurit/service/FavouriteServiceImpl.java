@@ -31,7 +31,8 @@ public class FavouriteServiceImpl implements FavouriteService {
             theFavourite = result.get();
         }
         else {
-            throw new RuntimeException("Favourite id is not found " + theId);
+//            throw new RuntimeException("Favourite id is not found " + theId);
+            return new Favourite();
         }
         return theFavourite;
     }

@@ -30,7 +30,8 @@ public class CheckInServiceImpl implements CheckInService {
         if (res.isPresent()) {
             checkIn = res.get();
         } else {
-            throw new RuntimeException("CheckIn id is not found");
+//            throw new RuntimeException("CheckIn id is not found");
+            return new CheckIn();
         }
         return checkIn;
     }

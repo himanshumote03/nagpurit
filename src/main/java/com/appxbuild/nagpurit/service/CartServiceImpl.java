@@ -32,7 +32,8 @@ public class CartServiceImpl implements CartService {
             theCart = result.get();
         }
         else {
-            throw new RuntimeException("Cart id is not found " + theId);
+//            throw new RuntimeException("Cart id is not found " + theId);
+            return new Cart();
         }
         return theCart;
     }

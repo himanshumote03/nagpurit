@@ -31,7 +31,8 @@ public class CheckOutServiceImpl implements CheckOutService {
             checkOut = res.get();
         }
         else {
-            throw new RuntimeException("CheckOut id is not found" + theId);
+//            throw new RuntimeException("CheckOut id is not found" + theId);
+            return new CheckOut();
         }
         return checkOut;
     }

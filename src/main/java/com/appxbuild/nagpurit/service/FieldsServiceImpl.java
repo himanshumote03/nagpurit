@@ -31,7 +31,8 @@ public class FieldsServiceImpl implements FieldsService{
             theFields = result.get();
         }
         else {
-            throw new RuntimeException("Field id is not found " + theId);
+//            throw new RuntimeException("Field id is not found " + theId);
+            return new Fields();
         }
         return theFields;
     }
