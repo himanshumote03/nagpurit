@@ -36,7 +36,7 @@ public class Transactions {
     public Transactions() {
     }
 
-    public Transactions( int amount, LocalDateTime paymentDate, LocalDateTime created, LocalDateTime modified) {
+    public Transactions(int amount, LocalDateTime paymentDate, LocalDateTime created, LocalDateTime modified) {
         this.amount = amount;
         this.paymentDate = paymentDate;
         this.created = created;

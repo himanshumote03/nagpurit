@@ -41,6 +41,7 @@ public class InstallmentPlanRestController {
         installmentPlan.setId(0);
         LocalDateTime dt = LocalDateTime.now();
         installmentPlan.setCreated(dt);
+        installmentPlan.setModified(null);
         InstallmentPlan newInstallmentPlan = installmentPlanService.save(installmentPlan);
         return newInstallmentPlan;
     }
