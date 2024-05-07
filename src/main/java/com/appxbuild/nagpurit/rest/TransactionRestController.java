@@ -46,7 +46,7 @@ public class TransactionRestController {
     public ResponseEntity<List<Transactions>> getTransactionsByLoginId(@PathVariable int loginId) {
         List<Transactions> theTransactions = transactionsService.findAll()
                 .stream()
-                .filter(wishlist -> wishlist.getLoginDetails() != null && wishlist.getLoginDetails().getId() == loginId)
+                .filter(t -> t.getLoginDetails() != null && t.getLoginDetails().getId() == loginId)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(theTransactions);
     }
@@ -95,3 +95,4 @@ public class TransactionRestController {
 
 
 }
+

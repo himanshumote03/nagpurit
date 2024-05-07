@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,11 +38,23 @@ public class ReviewsRestController {
         return theReviews;
     }
 
+
     @GetMapping("/reviews/login/{loginId}")
     public ResponseEntity<Reviews> getUserByLoginId(@PathVariable int loginId) {
         Optional<Reviews> reviews = reviewsService.findAll()
                 .stream()
                 .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
+                .findFirst();
+
+        return reviews.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/reviews/course/{courseId}")
+    public ResponseEntity<Reviews> getUserByCourseId(@PathVariable int courseId) {
+        Optional<Reviews> reviews = reviewsService.findAll()
+                .stream()
+                .filter(u -> u.getCourses() != null && u.getCourses().getId() == courseId)
                 .findFirst();
 
         return reviews.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
@@ -80,6 +93,5 @@ public class ReviewsRestController {
         reviewsService.deleteById(id);
         return ("Deleted Reviews id " + id);
     }
-
 
 }

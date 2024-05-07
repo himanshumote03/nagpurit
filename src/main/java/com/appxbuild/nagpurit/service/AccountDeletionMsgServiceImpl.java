@@ -30,7 +30,8 @@ public class AccountDeletionMsgServiceImpl implements AccountDeletionMsgService 
         if (res.isPresent()) {
             accountDeletionMsg = res.get();
         } else {
-            throw new RuntimeException("Account Deletion Message id is not found " + theId);
+//            throw new RuntimeException("Account Deletion Message id is not found " + theId);
+            return new AccountDeletionMsg();
         }
         return accountDeletionMsg;
     }

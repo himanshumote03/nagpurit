@@ -32,7 +32,8 @@ public class WishlistServiceImpl implements WishlistService {
             theWishlist = result.get();
         }
         else {
-            throw new RuntimeException("Wishlist id is not found " + theId);
+//            throw new RuntimeException("Wishlist id is not found " + theId);
+            return new Wishlist();
         }
         return theWishlist;
     }

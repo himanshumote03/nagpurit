@@ -1,12 +1,15 @@
 package com.appxbuild.nagpurit.rest;
 
 import com.appxbuild.nagpurit.entity.AccountDeletionMsg;
+import com.appxbuild.nagpurit.entity.Transactions;
 import com.appxbuild.nagpurit.service.AccountDeletionMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -32,6 +35,15 @@ public class AccountDeletionMsgRestController {
             throw new RuntimeException("Account Deletion Message id is not found" + id);
         }
         return accountDeletionMsg;
+    }
+
+    @GetMapping("/accountDeletionMsg/login/{loginId}")
+    public ResponseEntity<List<AccountDeletionMsg>> getTransactionsByLoginId(@PathVariable int loginId) {
+        List<AccountDeletionMsg> theAccountDeletionMsg = accountDeletionMsgService.findAll()
+                .stream()
+                .filter(ac -> ac.getLoginDetails() != null && ac.getLoginDetails().getId() == loginId)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(theAccountDeletionMsg);
     }
 
     @PostMapping("/accountDeletionMsg")

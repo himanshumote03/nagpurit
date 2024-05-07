@@ -32,7 +32,8 @@ public class ReviewsServiceImp implements ReviewsService {
             reviews = res.get();
         }
         else {
-            throw new RuntimeException("courseCategories id is not found" + theId);
+//            throw new RuntimeException("courseCategories id is not found" + theId);
+            return new Reviews();
         }
         return reviews;
     }

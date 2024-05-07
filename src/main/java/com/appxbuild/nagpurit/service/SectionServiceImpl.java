@@ -32,7 +32,8 @@ public class SectionServiceImpl implements SectionService{
             theSection = result.get();
         }
         else {
-            throw new RuntimeException("Section id is not found " + theId);
+//            throw new RuntimeException("Section id is not found " + theId);
+            return new Section();
         }
         return theSection;
     }

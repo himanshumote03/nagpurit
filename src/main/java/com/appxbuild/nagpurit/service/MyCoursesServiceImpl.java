@@ -31,7 +31,8 @@ public class MyCoursesServiceImpl implements MyCoursesService{
             theMyCourses = result.get();
         }
         else {
-            throw new RuntimeException("My Course id is not found " + theId);
+//            throw new RuntimeException("My Course id is not found " + theId);
+            return new MyCourses();
         }
         return theMyCourses;
     }

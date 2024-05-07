@@ -30,7 +30,8 @@ public class LoginDetailsServiceImpl implements LoginDetailsService {
             loginDetails = res.get();
         }
         else {
-            throw new RuntimeException("Login Detail id is not found " + theId);
+//            throw new RuntimeException("Login Detail id is not found " + theId);
+            return new LoginDetails();
         }
         return loginDetails;
     }

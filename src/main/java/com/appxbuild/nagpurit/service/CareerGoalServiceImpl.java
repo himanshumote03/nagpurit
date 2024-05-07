@@ -31,7 +31,8 @@ public class CareerGoalServiceImpl implements CareerGoalService {
             theCareerGoal = result.get();
         }
         else {
-            throw new RuntimeException("Career Goal id is not found " + theId);
+//            throw new RuntimeException("Career Goal id is not found " + theId);
+            return new CareerGoal();
         }
         return theCareerGoal;
     }

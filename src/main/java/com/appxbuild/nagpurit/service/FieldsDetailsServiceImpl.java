@@ -33,7 +33,8 @@ public class FieldsDetailsServiceImpl implements FieldsDetailsService{
             theFieldsDetails = result.get();
         }
         else {
-            throw  new RuntimeException("Field Details id is not found " + theId);
+//            throw  new RuntimeException("Field Details id is not found " + theId);
+            return new FieldsDetails();
         }
         return theFieldsDetails;
     }

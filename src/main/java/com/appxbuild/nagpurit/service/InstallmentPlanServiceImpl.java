@@ -31,7 +31,8 @@ public class InstallmentPlanServiceImpl implements InstallmentPlanService {
             installmentPlan = result.get();
         }
         else {
-            throw  new RuntimeException("Installment plan id is not found " + id);
+//            throw  new RuntimeException("Installment plan id is not found " + id);
+            return new InstallmentPlan();
         }
         return installmentPlan;
     }

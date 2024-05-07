@@ -33,7 +33,8 @@ public class CourseCategoriesServiceImpl implements CourseCategoriesService {
             courseCategories = res.get();
         }
         else {
-            throw new RuntimeException("courseCategories id is not found" + theId);
+//            throw new RuntimeException("courseCategories id is not found" + theId);
+            return new CourseCategories();
         }
         return courseCategories;
     }
