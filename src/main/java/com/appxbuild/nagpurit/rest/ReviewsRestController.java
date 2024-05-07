@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -40,30 +41,25 @@ public class ReviewsRestController {
 
 
     @GetMapping("/reviews/login/{loginId}")
-    public ResponseEntity<Reviews> getUserByLoginId(@PathVariable int loginId) {
-        Optional<Reviews> reviews = reviewsService.findAll()
+    public ResponseEntity<List<Reviews>> getReviewByLoginId(@PathVariable int loginId) {
+        List<Reviews> reviews = reviewsService.findAll()
                 .stream()
                 .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
-                .findFirst();
-
-        return reviews.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(reviews);
     }
 
     @GetMapping("/reviews/course/{courseId}")
-    public ResponseEntity<Reviews> getUserByCourseId(@PathVariable int courseId) {
-        Optional<Reviews> reviews = reviewsService.findAll()
+    public ResponseEntity<List<Reviews>> getReviewByCourseId(@PathVariable int courseId) {
+        List<Reviews> reviews = reviewsService.findAll()
                 .stream()
                 .filter(u -> u.getCourses() != null && u.getCourses().getId() == courseId)
-                .findFirst();
-
-        return reviews.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(reviews);}
 
     @PostMapping("/reviews")
-    public Reviews addCheckIn(@RequestBody Reviews reviews) {
-//        courseCategories.setId(0);
+    public Reviews addReview(@RequestBody Reviews reviews) {
+        reviews.setId(0);
         LocalDateTime dt = LocalDateTime.now();
         reviews.setCreated(dt);
         Reviews newReviews = reviewsService.save(reviews);
@@ -71,7 +67,7 @@ public class ReviewsRestController {
     }
 
     @PutMapping("/reviews")
-    public Reviews updateCheckIn(@RequestBody Reviews reviews) {
+    public Reviews updateReview(@RequestBody Reviews reviews) {
         Reviews existingReviews = reviewsService.findById(reviews.getId());
 
         if (existingReviews == null) {
@@ -85,7 +81,7 @@ public class ReviewsRestController {
     }
 
     @DeleteMapping("/reviews/{id}")
-    public String deleteCheckIn(@PathVariable int id) {
+    public String deleteReview(@PathVariable int id) {
         Reviews reviews = reviewsService.findById(id);
         if (reviews == null) {
             throw new RuntimeException("Reviews id is not found " + id);

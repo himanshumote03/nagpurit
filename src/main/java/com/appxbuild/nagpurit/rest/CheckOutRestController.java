@@ -42,7 +42,6 @@ public class CheckOutRestController {
                 .stream()
                 .filter(checkOut -> checkOut.getLoginDetails() != null && checkOut.getLoginDetails().getId() == loginId)
                 .collect(Collectors.toList());
-
         return ResponseEntity.ok(checkOuts);
     }
 

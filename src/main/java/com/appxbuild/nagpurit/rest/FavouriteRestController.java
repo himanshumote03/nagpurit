@@ -36,6 +36,7 @@ public class FavouriteRestController {
         return theFavourite;
     }
 
+
     @GetMapping("/favourite/login/{loginId}")
     public ResponseEntity<List<Favourite>> getFavouriteByLoginId(@PathVariable int loginId) {
         List<Favourite> theFavourite = favouriteService.findAll()
@@ -44,6 +45,8 @@ public class FavouriteRestController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(theFavourite);
     }
+
+
     @PostMapping("/favourite")
     public Favourite addFavourite(@RequestBody Favourite theFavourite){
         theFavourite.setId(0);
