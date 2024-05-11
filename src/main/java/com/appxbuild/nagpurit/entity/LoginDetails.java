@@ -48,12 +48,13 @@ public class LoginDetails {
     // Constructor
     public LoginDetails() {}
 
-    public LoginDetails(String name, String email, String password, LocalDateTime created, LocalDateTime modified) {
+    public LoginDetails(String name, String email, String password, LocalDateTime created, LocalDateTime modified, List<User> user) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.created = created;
         this.modified = modified;
+        this.user = user;
     }
 
     // getter and setter
@@ -103,6 +104,14 @@ public class LoginDetails {
 
     public void setModified(LocalDateTime modified) {
         this.modified = modified;
+    }
+
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
     }
 
     // toString()
