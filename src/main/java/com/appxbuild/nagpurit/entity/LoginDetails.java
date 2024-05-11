@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -38,6 +39,10 @@ public class LoginDetails {
 
     @OneToMany(mappedBy = "loginDetails")
     private List<Reviews> reviews;
+
+    @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("loginDetails")
+    private List<User> user;
 
 
     // Constructor
