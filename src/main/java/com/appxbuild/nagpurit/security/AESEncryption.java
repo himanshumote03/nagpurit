@@ -6,6 +6,7 @@ import java.util.Base64;
 
 public class AESEncryption {
     private static final String secretKey = "YourSecretKey"; // Change this to your secret key
+//    private static final String secretKey = "a6OQ4OgXZYm00hWVv37OxaH2JASK5Mqh"; // Change this to your secret key
 
     public static String encrypt(String strToEncrypt) {
         try {
