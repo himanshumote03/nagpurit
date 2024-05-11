@@ -22,6 +22,7 @@ import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -51,14 +52,13 @@ public class UserRestController {
     }
 
     @GetMapping("/user/login/{loginId}")
-    public ResponseEntity<User> getUserByLoginId(@PathVariable int loginId) {
-        Optional<User> user = userDao.findAll()
+    public ResponseEntity<List<User>> getUserByLoginId(@PathVariable int loginId) {
+        List<User> user = userDao.findAll()
                 .stream()
                 .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
-                .findFirst();
+                .collect(Collectors.toList());
 
-        return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return ResponseEntity.ok(user);
     }
 
 

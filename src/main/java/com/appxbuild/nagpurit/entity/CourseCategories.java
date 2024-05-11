@@ -1,11 +1,10 @@
 package com.appxbuild.nagpurit.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "course_categories")
@@ -24,13 +23,18 @@ public class CourseCategories {
     @Column(name = "modified")
     private LocalDateTime modified;
 
+    @OneToMany(mappedBy = "courseCategories", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("courseCategories")
+    private List<Courses> courses;
+
     public CourseCategories() {
     }
 
-    public CourseCategories(String courseType, LocalDateTime created, LocalDateTime modified) {
+    public CourseCategories(String courseType, LocalDateTime created, LocalDateTime modified, List<Courses> courses) {
         this.courseType = courseType;
         this.created = created;
         this.modified = modified;
+        this.courses = courses;
     }
 
     public int getId() {
@@ -65,6 +69,13 @@ public class CourseCategories {
         this.modified = modified;
     }
 
+    public List<Courses> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Courses> courses) {
+        this.courses = courses;
+    }
 
     @Override
     public String toString() {

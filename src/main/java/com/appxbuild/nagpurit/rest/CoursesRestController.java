@@ -52,22 +52,6 @@ public class CoursesRestController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // add mapping GET("/courses/{id}/image") to get Course image
-    @GetMapping("/courses/image/{id}")
-    public ResponseEntity<byte[]> getCourseImage(@PathVariable int id) throws IOException {
-        Optional<Courses> theCourses = coursesDao.findById(id);
-        if (theCourses.isPresent()) {
-            Courses courses = theCourses.get();
-            Path imagePath = Path.of("public/images/", courses.getImage()); // Adjust the path as needed
-            if (Files.exists(imagePath)) {
-                byte[] imageBytes = Files.readAllBytes(imagePath);
-                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-            }
-        }
-        // Return 404 if the product or image does not exist
-        return ResponseEntity.notFound().build();
-    }
-
     // add mapping POST("/courses") to add a Course
     @PostMapping("/courses")
     public ResponseEntity<String> addCourse(
