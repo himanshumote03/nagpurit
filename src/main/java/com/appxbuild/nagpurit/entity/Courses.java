@@ -94,9 +94,9 @@ public class Courses {
         this.id = id;
     }
 
-    public CourseCategories getCourseCategories() {
-        return courseCategories;
-    }
+//    public CourseCategories getCourseCategories() {
+//        return courseCategories;
+//    }
 
     public void setCourseCategories(CourseCategories courseCategories) {
         this.courseCategories = courseCategories;
