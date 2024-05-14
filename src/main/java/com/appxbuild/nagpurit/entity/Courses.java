@@ -42,7 +42,7 @@ public class Courses {
     private int cost;
 
     @Column(name = "course_outcome")
-    private String courseOutcome;
+    private List<String> courseOutcome;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
@@ -69,7 +69,7 @@ public class Courses {
 
     }
 
-    public Courses(CourseCategories courseCategories, String courseTitle, String description, Double ratings, String image, String language, String subTitle, int cost, String courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<Section> sections) {
+    public Courses(CourseCategories courseCategories, String courseTitle, String description, Double ratings, String image, String language, String subTitle, int cost, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<Section> sections) {
         this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
         this.description = description;
@@ -78,7 +78,6 @@ public class Courses {
         this.language = language;
         this.subTitle = subTitle;
         this.cost = cost;
-        this.courseOutcome = courseOutcome;
         this.instructor = instructor;
         this.created = created;
         this.modified = modified;
@@ -158,11 +157,11 @@ public class Courses {
         this.cost = cost;
     }
 
-    public String getCourseOutcome() {
+    public List<String> getCourseOutcome() {
         return courseOutcome;
     }
 
-    public void setCourseOutcome(String courseOutcome) {
+    public void setCourseOutcome(List<String> courseOutcome) {
         this.courseOutcome = courseOutcome;
     }
 
