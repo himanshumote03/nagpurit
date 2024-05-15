@@ -7,6 +7,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class CoursesDto {
 
     // define fields
@@ -30,7 +32,7 @@ public class CoursesDto {
 
     private int cost;
 
-    private String courseOutcome;
+    private List<String> courseOutcome;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
@@ -40,7 +42,7 @@ public class CoursesDto {
     public CoursesDto(){
 
     }
-    public CoursesDto(String courseTitle, String description, Double ratings, MultipartFile imageFile, String language, String subTitle, int cost, String courseOutcome) {
+    public CoursesDto(String courseTitle, String description, Double ratings, MultipartFile imageFile, String language, String subTitle, int cost) {
         this.courseTitle = courseTitle;
         this.description = description;
         this.ratings = ratings;
@@ -48,7 +50,6 @@ public class CoursesDto {
         this.language = language;
         this.subTitle = subTitle;
         this.cost = cost;
-        this.courseOutcome = courseOutcome;
     }
 
     // define getter/setter
@@ -124,11 +125,11 @@ public class CoursesDto {
         this.cost = cost;
     }
 
-    public String getCourseOutcome() {
+    public List<String> getCourseOutcome() {
         return courseOutcome;
     }
 
-    public void setCourseOutcome(String courseOutcome) {
+    public void setCourseOutcome(List<String> courseOutcome) {
         this.courseOutcome = courseOutcome;
     }
 
