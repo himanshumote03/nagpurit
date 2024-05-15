@@ -81,10 +81,10 @@ public class CoursesRestController {
             courses.setImage(imageUrl);  // Set the image URL
             courses.setCourseCategories(coursesDto.getCourseCategories());
             courses.setCourseTitle(coursesDto.getCourseTitle());
-            courses.setDescriptionTitle(courses.getDescriptionTitle());
-            courses.setDescriptionContent(courses.getDescriptionTitle());
+            courses.setDescriptionTitle(coursesDto.getDescriptionTitle());
+            courses.setDescriptionContent(coursesDto.getDescriptionTitle());
             courses.setLanguage(coursesDto.getLanguage());
-            courses.setDuration(courses.getDuration());
+            courses.setDuration(coursesDto.getDuration());
             courses.setSubTitle(coursesDto.getSubTitle());
             courses.setCost(coursesDto.getCost());
             courses.setCourseOutcome(coursesDto.getCourseOutcome());
