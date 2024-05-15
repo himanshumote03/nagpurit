@@ -197,6 +197,14 @@ public class Courses {
         this.section = section;
     }
 
+    public List<Reviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Reviews> reviews) {
+        this.reviews = reviews;
+    }
+
     // define toString method
     @Override
     public String toString() {

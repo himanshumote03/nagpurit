@@ -33,6 +33,7 @@ public class Section {
     @JsonIgnoreProperties("section")
     private List<Videos> videos;
 
+
     // define constructor
     public Section(){
 

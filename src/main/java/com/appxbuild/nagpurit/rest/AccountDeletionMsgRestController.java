@@ -1,7 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
 import com.appxbuild.nagpurit.entity.AccountDeletionMsg;
-import com.appxbuild.nagpurit.entity.Transactions;
 import com.appxbuild.nagpurit.service.AccountDeletionMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

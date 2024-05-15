@@ -23,7 +23,7 @@ CREATE TABLE `login_details` (
     `modified` DATETIME NULL DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-INSERT INTO `nagpurit`.`login_details` (`id`, `name`, `email`, `password`) VALUES ('1', 'Himanshu', 'himanshumote@gmail.com', 'himanshu'), ('2', 'Varun', 'varun@gmail.com', 'varun'), ('3', 'Neha', 'neha@gmail.com','neha');
+INSERT INTO `nagpurit`.`login_details` (`id`, `name`, `email`, `password`) VALUES ('1', 'Himanshu', 'mailto:himanshumote@gmail.com', 'himanshu'), ('2', 'Varun', 'mailto:varun@gmail.com', 'varun'), ('3', 'Neha', 'mailto:neha@gmail.com','neha');
 
 
 --

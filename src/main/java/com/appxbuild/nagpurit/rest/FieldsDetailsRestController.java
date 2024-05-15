@@ -1,6 +1,5 @@
 package com.appxbuild.nagpurit.rest;
 
-import com.appxbuild.nagpurit.entity.AccountDeletionMsg;
 import com.appxbuild.nagpurit.entity.FieldsDetails;
 import com.appxbuild.nagpurit.service.FieldsDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.appxbuild.nagpurit.service;
 
 import com.appxbuild.nagpurit.dao.FieldsDetailsDao;
-import com.appxbuild.nagpurit.entity.Fields;
 import com.appxbuild.nagpurit.entity.FieldsDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -25,7 +25,9 @@ public class AccountDeletionMsg {
 
 
     // constructor
-    public AccountDeletionMsg() {}
+    public AccountDeletionMsg() {
+
+    }
 
     public AccountDeletionMsg(String message, LocalDateTime created) {
         this.message = message;

@@ -1,6 +1,5 @@
 package com.appxbuild.nagpurit.rest;
 
-import com.appxbuild.nagpurit.entity.Section;
 import com.appxbuild.nagpurit.entity.Videos;
 import com.appxbuild.nagpurit.service.VideosService;
 import org.springframework.beans.factory.annotation.Autowired;

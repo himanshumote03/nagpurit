@@ -1,7 +1,6 @@
 package com.appxbuild.nagpurit.service;
 
 import com.appxbuild.nagpurit.dao.WishlistDao;
-import com.appxbuild.nagpurit.entity.MyCourses;
 import com.appxbuild.nagpurit.entity.Wishlist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
