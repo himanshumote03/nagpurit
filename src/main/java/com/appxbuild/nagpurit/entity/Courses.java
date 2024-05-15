@@ -125,6 +125,14 @@ public class Courses {
         this.descriptionTitle = descriptionTitle;
     }
 
+    public String getDescriptionContent() {
+        return descriptionContent;
+    }
+
+    public void setDescriptionContent(String descriptionContent) {
+        this.descriptionContent = descriptionContent;
+    }
+
     public Double getDuration() {
         return duration;
     }
@@ -163,10 +171,6 @@ public class Courses {
 
     public void setCost(int cost) {
         this.cost = cost;
-    }
-
-    public void setDescriptionContent(String descriptionContent) {
-        this.descriptionContent = descriptionContent;
     }
 
     public String getCourseOutcome() {
