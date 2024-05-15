@@ -27,7 +27,7 @@ public class Courses {
     private String descriptionTitle;
 
     @Column(name = "decsription_content")
-    private String descriptionContent;
+    private List<String> descriptionContent;
 
     @Column(name = "duration")
     private Double duration;
@@ -72,7 +72,7 @@ public class Courses {
 
     }
 
-    public Courses(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, String image, String language, String subTitle, int cost, List<String> courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<MyCourses> myCourses, List<Section> section, List<Reviews> reviews) {
+    public Courses(CourseCategories courseCategories, String courseTitle, String descriptionTitle, List<String> descriptionContent, Double duration, String image, String language, String subTitle, int cost, List<String> courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<MyCourses> myCourses, List<Section> section, List<Reviews> reviews) {
         this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
         this.descriptionTitle = descriptionTitle;
@@ -125,11 +125,11 @@ public class Courses {
         this.descriptionTitle = descriptionTitle;
     }
 
-    public String getDescriptionContent() {
+    public List<String> getDescriptionContent() {
         return descriptionContent;
     }
 
-    public void setDescriptionContent(String descriptionContent) {
+    public void setDescriptionContent(List<String> descriptionContent) {
         this.descriptionContent = descriptionContent;
     }
 

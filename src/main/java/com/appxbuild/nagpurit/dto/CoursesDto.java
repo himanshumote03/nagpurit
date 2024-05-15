@@ -2,7 +2,6 @@ package com.appxbuild.nagpurit.dto;
 
 import com.appxbuild.nagpurit.entity.CourseCategories;
 import com.appxbuild.nagpurit.entity.Instructor;
-import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,7 +22,7 @@ public class CoursesDto {
 
     private String descriptionTitle;
 
-    private String descriptionContent;
+    private List<String> descriptionContent;
 
     private Double duration;
 
@@ -46,7 +45,7 @@ public class CoursesDto {
 
     }
 
-    public CoursesDto(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, MultipartFile imageFile, String language, String subTitle, int cost, List<String> courseOutcome, Instructor instructor) {
+    public CoursesDto(CourseCategories courseCategories, String courseTitle, String descriptionTitle, List<String> descriptionContent, Double duration, MultipartFile imageFile, String language, String subTitle, int cost, List<String> courseOutcome, Instructor instructor) {
         this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
         this.descriptionTitle = descriptionTitle;
@@ -93,11 +92,11 @@ public class CoursesDto {
         this.descriptionTitle = descriptionTitle;
     }
 
-    public String getDescriptionContent() {
+    public List<String> getDescriptionContent() {
         return descriptionContent;
     }
 
-    public void setDescriptionContent(String descriptionContent) {
+    public void setDescriptionContent(List<String> descriptionContent) {
         this.descriptionContent = descriptionContent;
     }
 
