@@ -22,11 +22,11 @@ public class Instructor {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "designation")
+    private String designation;
+
     @Column(name = "total_students")
     private int totalStudents;
-
-    @Column(name = "reviews")
-    private int reviews;
 
     @Column(name = "description")
     private String description;
@@ -50,11 +50,11 @@ public class Instructor {
     public Instructor(){
 
     }
-    public Instructor(String image, String name, int totalStudents, int reviews, String description, String githubUrl, String linkedinUrl, LocalDateTime created, LocalDateTime modified) {
+    public Instructor(String image, String name, int totalStudents, String designation, String description, String githubUrl, String linkedinUrl, LocalDateTime created, LocalDateTime modified) {
         this.image = image;
         this.name = name;
         this.totalStudents = totalStudents;
-        this.reviews = reviews;
+        this.designation = designation;
         this.description = description;
         this.githubUrl = githubUrl;
         this.linkedinUrl = linkedinUrl;
@@ -91,16 +91,16 @@ public class Instructor {
         return totalStudents;
     }
 
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
     public void setTotalStudents(int totalStudents) {
         this.totalStudents = totalStudents;
-    }
-
-    public int getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(int reviews) {
-        this.reviews = reviews;
     }
 
     public String getDescription() {
@@ -150,14 +150,14 @@ public class Instructor {
                 "id=" + id +
                 ", image='" + image + '\'' +
                 ", name='" + name + '\'' +
+                ", designation='" + designation + '\'' +
                 ", totalStudents=" + totalStudents +
-                ", reviews=" + reviews +
                 ", description='" + description + '\'' +
                 ", githubUrl='" + githubUrl + '\'' +
                 ", linkedinUrl='" + linkedinUrl + '\'' +
                 ", created=" + created +
                 ", modified=" + modified +
+                ", courses=" + courses +
                 '}';
     }
-
 }

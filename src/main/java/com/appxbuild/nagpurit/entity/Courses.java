@@ -23,11 +23,14 @@ public class Courses {
     @Column(name = "course_title")
     private String courseTitle;
 
-    @Column(name = "decsription")
-    private String description;
+    @Column(name = "decsription_title")
+    private String descriptionTitle;
 
-    @Column(name = "ratings")
-    private Double ratings;
+    @Column(name = "decsription_content")
+    private String descriptionContent;
+
+    @Column(name = "duration")
+    private Double duration;
 
     @Column(name = "image")
     private String image;
@@ -69,20 +72,25 @@ public class Courses {
 
     }
 
-    public Courses(CourseCategories courseCategories, String courseTitle, String description, Double ratings, String image, String language, String subTitle, int cost, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<Section> sections) {
+    public Courses(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, String image, String language, String subTitle, int cost, List<String> courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<MyCourses> myCourses, List<Section> section, List<Reviews> reviews) {
         this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
-        this.description = description;
-        this.ratings = ratings;
+        this.descriptionTitle = descriptionTitle;
+        this.descriptionContent = descriptionContent;
+        this.duration = duration;
         this.image = image;
         this.language = language;
         this.subTitle = subTitle;
         this.cost = cost;
+        this.courseOutcome = courseOutcome;
         this.instructor = instructor;
         this.created = created;
         this.modified = modified;
+        this.myCourses = myCourses;
         this.section = section;
+        this.reviews = reviews;
     }
+
 
     // define getter/setter
     public int getId() {
@@ -109,20 +117,28 @@ public class Courses {
         this.courseTitle = courseTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionTitle() {
+        return descriptionTitle;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionTitle(String descriptionTitle) {
+        this.descriptionTitle = descriptionTitle;
     }
 
-    public Double getRatings() {
-        return ratings;
+    public String getDescriptionContent() {
+        return descriptionContent;
     }
 
-    public void setRatings(Double ratings) {
-        this.ratings = ratings;
+    public void setDescriptionContent(String descriptionContent) {
+        this.descriptionContent = descriptionContent;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
     }
 
     public String getImage() {
@@ -197,6 +213,14 @@ public class Courses {
         this.section = section;
     }
 
+    public List<Reviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Reviews> reviews) {
+        this.reviews = reviews;
+    }
+
     // define toString method
     @Override
     public String toString() {
@@ -204,18 +228,20 @@ public class Courses {
                 "id=" + id +
                 ", courseCategories=" + courseCategories +
                 ", courseTitle='" + courseTitle + '\'' +
-                ", description='" + description + '\'' +
-                ", ratings=" + ratings +
+                ", descriptionTitle='" + descriptionTitle + '\'' +
+                ", descriptionContent='" + descriptionContent + '\'' +
+                ", duration=" + duration +
                 ", image='" + image + '\'' +
                 ", language='" + language + '\'' +
                 ", subTitle='" + subTitle + '\'' +
                 ", cost=" + cost +
-                ", courseOutcome='" + courseOutcome + '\'' +
+                ", courseOutcome=" + courseOutcome +
                 ", instructor=" + instructor +
                 ", created=" + created +
                 ", modified=" + modified +
                 ", myCourses=" + myCourses +
                 ", section=" + section +
+                ", reviews=" + reviews +
                 '}';
     }
 }
