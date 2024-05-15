@@ -189,8 +189,8 @@ CREATE TABLE `courses` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `course_category_id` INT DEFAULT NULL,
   `course_title` VARCHAR(255) DEFAULT NULL,
-  `decsription_title` VARCHAR(512) DEFAULT NULL, -- description
-  `decsription_content` VARCHAR(1000) DEFAULT NULL,
+  `description_title` VARCHAR(512) DEFAULT NULL, -- description
+  `description_content` VARCHAR(1000) DEFAULT NULL,
   `duration` DOUBLE DEFAULT NULL, -- ratings
   `image` VARCHAR(512) NOT NULL,
   `language` VARCHAR(100) NOT NULL,

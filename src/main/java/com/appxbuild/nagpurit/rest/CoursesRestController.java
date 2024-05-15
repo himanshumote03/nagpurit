@@ -42,11 +42,18 @@ public class CoursesRestController {
 
     // add mapping GET("/courses/{id}") to get a Course
     @GetMapping("/courses/{id}")
-    public ResponseEntity<Courses> getCourse(@PathVariable int id) {
+    public Optional<Courses> getCourse(@PathVariable int id) {
         Optional<Courses> theCourses = coursesDao.findById(id);
-        return theCourses.map(courses -> new ResponseEntity<>(courses, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (theCourses.isEmpty()) {
+            return Optional.of(new Courses());
+        }
+        return theCourses;
     }
+//    public ResponseEntity<Courses> getCourse(@PathVariable int id) {
+//            Optional<Courses> theCourses = coursesDao.findById(id);
+//            return theCourses.map(courses -> new ResponseEntity<>(courses, HttpStatus.OK))
+//                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//        }
 
     // add mapping POST("/courses") to add a Course
     @PostMapping("/courses")

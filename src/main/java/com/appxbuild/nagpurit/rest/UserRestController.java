@@ -41,11 +41,18 @@ public class UserRestController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
+    public Optional<User> getUserById(@PathVariable int id) {
         Optional<User> user = userDao.findById(id);
-        return user.map(course -> new ResponseEntity<>(course, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (user.isEmpty()) {
+            return Optional.of(new User());
+        }
+        return user;
     }
+//    public ResponseEntity<User> getUserById(@PathVariable int id) {
+//        Optional<User> user = userDao.findById(id);
+//        return user.map(course -> new ResponseEntity<>(course, HttpStatus.OK))
+//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
     @GetMapping("/user/login/{loginId}")
     public ResponseEntity<List<User>> getUserByLoginId(@PathVariable int loginId) {
@@ -53,7 +60,6 @@ public class UserRestController {
                 .stream()
                 .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
                 .collect(Collectors.toList());
-
         return ResponseEntity.ok(user);
     }
 

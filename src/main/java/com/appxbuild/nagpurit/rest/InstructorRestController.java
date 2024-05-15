@@ -42,11 +42,18 @@ public class InstructorRestController {
 
     // add mapping GET("/instructor/{id}") to get a Instructor
     @GetMapping("/instructor/{id}")
-    public ResponseEntity<Instructor> getInstructor(@PathVariable int id) {
+    public Optional<Instructor> getInstructor(@PathVariable int id) {
         Optional<Instructor> theInstructor = instructorDao.findById(id);
-        return theInstructor.map(instructor -> new ResponseEntity<>(instructor, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (theInstructor.isEmpty()) {
+            return Optional.of(new Instructor());
+        }
+        return theInstructor;
     }
+//    public ResponseEntity<Instructor> getInstructor(@PathVariable int id) {
+//        Optional<Instructor> theInstructor = instructorDao.findById(id);
+//        return theInstructor.map(instructor -> new ResponseEntity<>(instructor, HttpStatus.OK))
+//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
 
     // add mapping POST("/instructor") to add an Instructor
@@ -79,7 +86,7 @@ public class InstructorRestController {
             instructor.setId(instructorDto.getId());
             instructor.setImage(imageUrl);
             instructor.setName(instructorDto.getName());
-            instructor.setDesignation(instructor.getDesignation());
+            instructor.setDesignation(instructorDto.getDesignation());
             instructor.setTotalStudents(instructorDto.getTotalStudents());
             instructor.setDescription(instructorDto.getDescription());
             instructor.setGithubUrl(instructorDto.getGithubUrl());
