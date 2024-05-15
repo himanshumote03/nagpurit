@@ -82,7 +82,7 @@ public class CoursesRestController {
             courses.setCourseCategories(coursesDto.getCourseCategories());
             courses.setCourseTitle(coursesDto.getCourseTitle());
             courses.setDescriptionTitle(courses.getDescriptionTitle());
-            courses.setDescriptionContent(courses.getDescriptionContent());
+            courses.setDescriptionContent(courses.getDescriptionTitle());
             courses.setLanguage(coursesDto.getLanguage());
             courses.setDuration(courses.getDuration());
             courses.setSubTitle(coursesDto.getSubTitle());

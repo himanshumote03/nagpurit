@@ -27,7 +27,7 @@ public class Courses {
     private String descriptionTitle;
 
     @Column(name = "decsription_content")
-    private List<String> descriptionContent;
+    private String descriptionContent;
 
     @Column(name = "duration")
     private Double duration;
@@ -45,7 +45,7 @@ public class Courses {
     private int cost;
 
     @Column(name = "course_outcome")
-    private List<String> courseOutcome;
+    private String courseOutcome;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
@@ -72,7 +72,7 @@ public class Courses {
 
     }
 
-    public Courses(CourseCategories courseCategories, String courseTitle, String descriptionTitle, List<String> descriptionContent, Double duration, String image, String language, String subTitle, int cost, List<String> courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<MyCourses> myCourses, List<Section> section, List<Reviews> reviews) {
+    public Courses(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, String image, String language, String subTitle, int cost, String courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<MyCourses> myCourses, List<Section> section, List<Reviews> reviews) {
         this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
         this.descriptionTitle = descriptionTitle;
@@ -125,14 +125,6 @@ public class Courses {
         this.descriptionTitle = descriptionTitle;
     }
 
-    public List<String> getDescriptionContent() {
-        return descriptionContent;
-    }
-
-    public void setDescriptionContent(List<String> descriptionContent) {
-        this.descriptionContent = descriptionContent;
-    }
-
     public Double getDuration() {
         return duration;
     }
@@ -173,11 +165,15 @@ public class Courses {
         this.cost = cost;
     }
 
-    public List<String> getCourseOutcome() {
+    public void setDescriptionContent(String descriptionContent) {
+        this.descriptionContent = descriptionContent;
+    }
+
+    public String getCourseOutcome() {
         return courseOutcome;
     }
 
-    public void setCourseOutcome(List<String> courseOutcome) {
+    public void setCourseOutcome(String courseOutcome) {
         this.courseOutcome = courseOutcome;
     }
 
@@ -244,4 +240,6 @@ public class Courses {
                 ", reviews=" + reviews +
                 '}';
     }
+
+
 }

@@ -22,7 +22,7 @@ public class CoursesDto {
 
     private String descriptionTitle;
 
-    private List<String> descriptionContent;
+    private String descriptionContent;
 
     private Double duration;
 
@@ -34,7 +34,7 @@ public class CoursesDto {
 
     private int cost;
 
-    private List<String> courseOutcome;
+    private String courseOutcome;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id", referencedColumnName = "id")
@@ -45,7 +45,7 @@ public class CoursesDto {
 
     }
 
-    public CoursesDto(CourseCategories courseCategories, String courseTitle, String descriptionTitle, List<String> descriptionContent, Double duration, MultipartFile imageFile, String language, String subTitle, int cost, List<String> courseOutcome, Instructor instructor) {
+    public CoursesDto(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, MultipartFile imageFile, String language, String subTitle, int cost, String courseOutcome, Instructor instructor) {
         this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
         this.descriptionTitle = descriptionTitle;
@@ -60,6 +60,8 @@ public class CoursesDto {
     }
 
     // define getter/setter
+
+
     public int getId() {
         return id;
     }
@@ -92,11 +94,11 @@ public class CoursesDto {
         this.descriptionTitle = descriptionTitle;
     }
 
-    public List<String> getDescriptionContent() {
+    public String getDescriptionContent() {
         return descriptionContent;
     }
 
-    public void setDescriptionContent(List<String> descriptionContent) {
+    public void setDescriptionContent(String descriptionContent) {
         this.descriptionContent = descriptionContent;
     }
 
@@ -140,11 +142,11 @@ public class CoursesDto {
         this.cost = cost;
     }
 
-    public List<String> getCourseOutcome() {
+    public String getCourseOutcome() {
         return courseOutcome;
     }
 
-    public void setCourseOutcome(List<String> courseOutcome) {
+    public void setCourseOutcome(String courseOutcome) {
         this.courseOutcome = courseOutcome;
     }
 
