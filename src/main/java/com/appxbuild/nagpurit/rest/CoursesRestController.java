@@ -81,9 +81,10 @@ public class CoursesRestController {
             courses.setImage(imageUrl);  // Set the image URL
             courses.setCourseCategories(coursesDto.getCourseCategories());
             courses.setCourseTitle(coursesDto.getCourseTitle());
-            courses.setDescription(coursesDto.getDescription());
-            courses.setRatings(coursesDto.getRatings());
+            courses.setDescriptionTitle(courses.getDescriptionTitle());
+            courses.setDescriptionContent(courses.getDescriptionContent());
             courses.setLanguage(coursesDto.getLanguage());
+            courses.setDuration(courses.getDuration());
             courses.setSubTitle(coursesDto.getSubTitle());
             courses.setCost(coursesDto.getCost());
             courses.setCourseOutcome(coursesDto.getCourseOutcome());
@@ -133,8 +134,9 @@ public class CoursesRestController {
 //        existingCourse.setImage(coursesDt);
         existingCourse.setCourseCategories(coursesDto.getCourseCategories());
         existingCourse.setCourseTitle(coursesDto.getCourseTitle());
-        existingCourse.setDescription(coursesDto.getDescription());
-        existingCourse.setRatings(coursesDto.getRatings());
+        existingCourse.setDescriptionTitle(coursesDto.getDescriptionTitle());
+        existingCourse.setDescriptionContent(coursesDto.getDescriptionContent());
+        existingCourse.setDuration(coursesDto.getDuration());
         existingCourse.setLanguage(coursesDto.getLanguage());
         existingCourse.setSubTitle(coursesDto.getSubTitle());
         existingCourse.setCost(coursesDto.getCost());

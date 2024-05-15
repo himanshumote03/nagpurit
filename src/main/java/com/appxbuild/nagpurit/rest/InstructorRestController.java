@@ -79,8 +79,8 @@ public class InstructorRestController {
             instructor.setId(instructorDto.getId());
             instructor.setImage(imageUrl);
             instructor.setName(instructorDto.getName());
+            instructor.setDesignation(instructor.getDesignation());
             instructor.setTotalStudents(instructorDto.getTotalStudents());
-            instructor.setReviews(instructorDto.getReviews());
             instructor.setDescription(instructorDto.getDescription());
             instructor.setGithubUrl(instructorDto.getGithubUrl());
             instructor.setLinkedinUrl(instructorDto.getLinkedinUrl());
@@ -127,8 +127,8 @@ public class InstructorRestController {
         existingInstructor.setId(instructorDto.getId());
         existingInstructor.setName(instructorDto.getName());
         existingInstructor.setTotalStudents(instructorDto.getTotalStudents());
-        existingInstructor.setReviews(instructorDto.getReviews());
         existingInstructor.setDescription(instructorDto.getDescription());
+        existingInstructor.setDesignation(instructorDto.getDesignation());
         existingInstructor.setGithubUrl(instructorDto.getGithubUrl());
         existingInstructor.setLinkedinUrl(instructorDto.getLinkedinUrl());
 
