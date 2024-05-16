@@ -37,22 +37,22 @@ public class ReviewsRestController {
     }
 
 
-    @GetMapping("/reviews/login/{loginId}")
-    public ResponseEntity<List<Reviews>> getReviewByLoginId(@PathVariable int loginId) {
-        List<Reviews> reviews = reviewsService.findAll()
-                .stream()
-                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(reviews);
-    }
+//    @GetMapping("/reviews/login/{loginId}")
+//    public ResponseEntity<List<Reviews>> getReviewByLoginId(@PathVariable int loginId) {
+//        List<Reviews> reviews = reviewsService.findAll()
+//                .stream()
+//                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(reviews);
+//    }
 
-    @GetMapping("/reviews/course/{courseId}")
-    public ResponseEntity<List<Reviews>> getReviewByCourseId(@PathVariable int courseId) {
-        List<Reviews> reviews = reviewsService.findAll()
-                .stream()
-                .filter(u -> u.getCourses() != null && u.getCourses().getId() == courseId)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(reviews);}
+//    @GetMapping("/reviews/course/{courseId}")
+//    public ResponseEntity<List<Reviews>> getReviewByCourseId(@PathVariable int courseId) {
+//        List<Reviews> reviews = reviewsService.findAll()
+//                .stream()
+//                .filter(u -> u.getCourses() != null && u.getCourses().getId() == courseId)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(reviews);}
 
     @PostMapping("/reviews")
     public Reviews addReview(@RequestBody Reviews reviews) {

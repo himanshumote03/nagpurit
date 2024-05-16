@@ -58,6 +58,7 @@ public class Courses {
     private LocalDateTime modified;
 
     @OneToMany(mappedBy = "courses")
+    @JsonIgnoreProperties("courses")
     private List<MyCourses> myCourses;
 
     @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL)
@@ -65,6 +66,7 @@ public class Courses {
     private List<Section> section;
 
     @OneToMany(mappedBy = "courses")
+    @JsonIgnoreProperties("courses")
     private List<Reviews> reviews;
 
     @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL)

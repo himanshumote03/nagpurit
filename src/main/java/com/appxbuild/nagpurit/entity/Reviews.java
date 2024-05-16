@@ -44,17 +44,17 @@ public class Reviews {
         this.id = id;
     }
 
-    public LoginDetails getLoginDetails() {
-        return loginDetails;
+    public String getLoginDetails() {
+        return loginDetails.getName();
     }
 
     public void setLoginDetails(LoginDetails loginDetails) {
         this.loginDetails = loginDetails;
     }
 
-    public Courses getCourses() {
-        return courses;
-    }
+//    public Courses getCourses() {
+//        return courses;
+//    }
 
     public void setCourses(Courses courses) {
         this.courses = courses;
