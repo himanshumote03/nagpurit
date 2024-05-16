@@ -229,14 +229,6 @@ public class Courses {
         this.reviews = reviews;
     }
 
-    public List<CourseRatings> getCourseRatings() {
-        return courseRatings;
-    }
-
-    public void setCourseRatings(List<CourseRatings> courseRatings) {
-        this.courseRatings = courseRatings;
-    }
-
     // define toString method
     @Override
     public String toString() {

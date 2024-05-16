@@ -46,9 +46,6 @@ public class Instructor {
     @OneToMany(mappedBy = "instructor")
     private List<Courses> courses;
 
-    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("instructor")
-    private List<InstructorRatings> instructorRatings;
 
     @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("instructor")
@@ -58,7 +55,7 @@ public class Instructor {
     public Instructor(){
 
     }
-    public Instructor(String image, String name, int totalStudents, String designation, String description, String githubUrl, String linkedinUrl, LocalDateTime created, LocalDateTime modified, List<InstructorRatings> instructorRatings, List<InstructorReviews> instructorReviews) {
+    public Instructor(String image, String name, int totalStudents, String designation, String description, String githubUrl, String linkedinUrl, LocalDateTime created, LocalDateTime modified, List<InstructorReviews> instructorReviews) {
         this.image = image;
         this.name = name;
         this.totalStudents = totalStudents;
@@ -68,7 +65,6 @@ public class Instructor {
         this.linkedinUrl = linkedinUrl;
         this.created = created;
         this.modified = modified;
-        this.instructorRatings = instructorRatings;
         this.instructorReviews = instructorReviews;
     }
 
@@ -153,14 +149,6 @@ public class Instructor {
         this.modified = modified;
     }
 
-    public List<InstructorRatings> getInstructorRatings() {
-        return instructorRatings;
-    }
-
-    public void setInstructorRatings(List<InstructorRatings> instructorRatings) {
-        this.instructorRatings = instructorRatings;
-    }
-
     public List<InstructorReviews> getInstructorReviews() {
         return instructorReviews;
     }
@@ -184,7 +172,6 @@ public class Instructor {
                 ", created=" + created +
                 ", modified=" + modified +
                 ", courses=" + courses +
-                ", instructorRatings=" + instructorRatings +
                 ", instructorReviews=" + instructorReviews +
                 '}';
     }

@@ -389,6 +389,7 @@ CREATE TABLE `instructor_ratings` (
 
 
 
-
+ALTER TABLE `instructor_ratings`
+ADD `` varchar(255);
 
 

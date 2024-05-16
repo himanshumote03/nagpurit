@@ -36,14 +36,14 @@ public class CartRestController {
         return theCart;
     }
 
-    @GetMapping("/cart/login/{loginId}")
-    public ResponseEntity<List<Cart>> getCartByLoginId(@PathVariable int loginId) {
-        List<Cart> theCart = cartService.findAll()
-                .stream()
-                .filter(cart -> cart.getLoginDetails() != null && cart.getLoginDetails().getId() == loginId)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(theCart);
-    }
+//    @GetMapping("/cart/login/{loginId}")
+//    public ResponseEntity<List<Cart>> getCartByLoginId(@PathVariable int loginId) {
+//        List<Cart> theCart = cartService.findAll()
+//                .stream()
+//                .filter(cart -> cart.getLoginDetails() != null && cart.getLoginDetails().getId() == loginId)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(theCart);
+//    }
     @PostMapping("/cart")
     public Cart addCart(@RequestBody Cart theCart){
         theCart.setId(0);
