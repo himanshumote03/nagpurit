@@ -7,7 +7,6 @@ import com.appxbuild.nagpurit.entity.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -45,11 +41,18 @@ public class UserRestController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
+    public Optional<User> getUserById(@PathVariable int id) {
         Optional<User> user = userDao.findById(id);
-        return user.map(course -> new ResponseEntity<>(course, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (user.isEmpty()) {
+            return Optional.of(new User());
+        }
+        return user;
     }
+//    public ResponseEntity<User> getUserById(@PathVariable int id) {
+//        Optional<User> user = userDao.findById(id);
+//        return user.map(course -> new ResponseEntity<>(course, HttpStatus.OK))
+//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
     @GetMapping("/user/login/{loginId}")
     public ResponseEntity<List<User>> getUserByLoginId(@PathVariable int loginId) {
@@ -57,7 +60,6 @@ public class UserRestController {
                 .stream()
                 .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
                 .collect(Collectors.toList());
-
         return ResponseEntity.ok(user);
     }
 

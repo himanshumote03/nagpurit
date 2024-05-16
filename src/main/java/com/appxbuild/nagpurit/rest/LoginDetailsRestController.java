@@ -3,8 +3,6 @@ package com.appxbuild.nagpurit.rest;
 import com.appxbuild.nagpurit.entity.LoginDetails;
 import com.appxbuild.nagpurit.security.AESEncryption;
 import com.appxbuild.nagpurit.service.LoginDetailsService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

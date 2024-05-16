@@ -13,7 +13,7 @@ public class InstructorDto {
 
     private int totalStudents;
 
-    private int reviews;
+    private String designation;
 
     private String description;
 
@@ -25,11 +25,11 @@ public class InstructorDto {
     public InstructorDto(){
 
     }
-    public InstructorDto(MultipartFile imageFile, String name, int totalStudents, int reviews, String description, String githubUrl, String linkedinUrl) {
+    public InstructorDto(MultipartFile imageFile, String name, int totalStudents, String designation, String description, String githubUrl, String linkedinUrl) {
         this.imageFile = imageFile;
         this.name = name;
         this.totalStudents = totalStudents;
-        this.reviews = reviews;
+        this.designation = designation;
         this.description = description;
         this.githubUrl = githubUrl;
         this.linkedinUrl = linkedinUrl;
@@ -68,12 +68,12 @@ public class InstructorDto {
         this.totalStudents = totalStudents;
     }
 
-    public int getReviews() {
-        return reviews;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setReviews(int reviews) {
-        this.reviews = reviews;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public String getDescription() {
@@ -108,10 +108,11 @@ public class InstructorDto {
                 ", imageFile=" + imageFile +
                 ", name='" + name + '\'' +
                 ", totalStudents=" + totalStudents +
-                ", reviews=" + reviews +
+                ", designation='" + designation + '\'' +
                 ", description='" + description + '\'' +
                 ", githubUrl='" + githubUrl + '\'' +
                 ", linkedinUrl='" + linkedinUrl + '\'' +
                 '}';
     }
+
 }

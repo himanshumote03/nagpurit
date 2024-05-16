@@ -44,6 +44,26 @@ public class LoginDetails {
     @JsonIgnoreProperties("loginDetails")
     private List<User> user;
 
+    @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("loginDetails")
+    private List<MyCourses> myCourses;
+
+    @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("loginDetails")
+    private List<Cart> cart;
+    @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("loginDetails")
+    private List<Wishlist> wishlists;
+
+    @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("loginDetails")
+    private List<Favourite> favourites;
+
+    @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("loginDetails")
+    private List<Transactions> transactions;
+
+
 
     // Constructor
     public LoginDetails() {}
@@ -112,6 +132,46 @@ public class LoginDetails {
 
     public void setUser(List<User> user) {
         this.user = user;
+    }
+
+    public List<MyCourses> getMyCourses() {
+        return myCourses;
+    }
+
+    public void setMyCourses(List<MyCourses> myCourses) {
+        this.myCourses = myCourses;
+    }
+
+    public List<Cart> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
+    }
+
+    public List<Wishlist> getWishlists() {
+        return wishlists;
+    }
+
+    public void setWishlists(List<Wishlist> wishlists) {
+        this.wishlists = wishlists;
+    }
+
+    public List<Favourite> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(List<Favourite> favourites) {
+        this.favourites = favourites;
+    }
+
+    public List<Transactions> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transactions> transactions) {
+        this.transactions = transactions;
     }
 
     // toString()

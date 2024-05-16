@@ -7,7 +7,6 @@ import com.appxbuild.nagpurit.entity.Courses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,11 +42,18 @@ public class CoursesRestController {
 
     // add mapping GET("/courses/{id}") to get a Course
     @GetMapping("/courses/{id}")
-    public ResponseEntity<Courses> getCourse(@PathVariable int id) {
+    public Optional<Courses> getCourse(@PathVariable int id) {
         Optional<Courses> theCourses = coursesDao.findById(id);
-        return theCourses.map(courses -> new ResponseEntity<>(courses, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (theCourses.isEmpty()) {
+            return Optional.of(new Courses());
+        }
+        return theCourses;
     }
+//    public ResponseEntity<Courses> getCourse(@PathVariable int id) {
+//            Optional<Courses> theCourses = coursesDao.findById(id);
+//            return theCourses.map(courses -> new ResponseEntity<>(courses, HttpStatus.OK))
+//                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//        }
 
     // add mapping POST("/courses") to add a Course
     @PostMapping("/courses")
@@ -85,9 +88,10 @@ public class CoursesRestController {
             courses.setImage(imageUrl);  // Set the image URL
             courses.setCourseCategories(coursesDto.getCourseCategories());
             courses.setCourseTitle(coursesDto.getCourseTitle());
-            courses.setDescription(coursesDto.getDescription());
-            courses.setRatings(coursesDto.getRatings());
+            courses.setDescriptionTitle(coursesDto.getDescriptionTitle());
+            courses.setDescriptionContent(coursesDto.getDescriptionTitle());
             courses.setLanguage(coursesDto.getLanguage());
+            courses.setDuration(coursesDto.getDuration());
             courses.setSubTitle(coursesDto.getSubTitle());
             courses.setCost(coursesDto.getCost());
             courses.setCourseOutcome(coursesDto.getCourseOutcome());
@@ -137,8 +141,9 @@ public class CoursesRestController {
 //        existingCourse.setImage(coursesDt);
         existingCourse.setCourseCategories(coursesDto.getCourseCategories());
         existingCourse.setCourseTitle(coursesDto.getCourseTitle());
-        existingCourse.setDescription(coursesDto.getDescription());
-        existingCourse.setRatings(coursesDto.getRatings());
+        existingCourse.setDescriptionTitle(coursesDto.getDescriptionTitle());
+        existingCourse.setDescriptionContent(coursesDto.getDescriptionContent());
+        existingCourse.setDuration(coursesDto.getDuration());
         existingCourse.setLanguage(coursesDto.getLanguage());
         existingCourse.setSubTitle(coursesDto.getSubTitle());
         existingCourse.setCost(coursesDto.getCost());

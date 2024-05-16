@@ -1,7 +1,6 @@
 package com.appxbuild.nagpurit.service;
 
 import com.appxbuild.nagpurit.entity.Cart;
-import com.appxbuild.nagpurit.entity.Wishlist;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

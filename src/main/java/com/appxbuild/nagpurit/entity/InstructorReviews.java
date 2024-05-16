@@ -5,17 +5,21 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "account_deletion_msg")
-public class AccountDeletionMsg {
+@Table(name = "instructor_reviews")
+public class InstructorReviews {
 
-    // fields
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "login_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "login_id", referencedColumnName = "id")
     private LoginDetails loginDetails;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "instructor_id", referencedColumnName = "id")
+    private Instructor instructor;
 
     @Column(name = "message")
     private String message;
@@ -24,18 +28,14 @@ public class AccountDeletionMsg {
     private LocalDateTime created;
 
 
-    // constructor
-    public AccountDeletionMsg() {
-
+    public InstructorReviews() {
     }
 
-    public AccountDeletionMsg(String message, LocalDateTime created) {
+    public InstructorReviews(String message, LocalDateTime created) {
         this.message = message;
         this.created = created;
     }
 
-
-    // getter/setter
     public int getId() {
         return id;
     }
@@ -50,6 +50,14 @@ public class AccountDeletionMsg {
 
     public void setLoginDetails(LoginDetails loginDetails) {
         this.loginDetails = loginDetails;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     public String getMessage() {
@@ -69,13 +77,12 @@ public class AccountDeletionMsg {
     }
 
 
-    // toString()
-
     @Override
     public String toString() {
-        return "AccountDeletionMsg{" +
+        return "Reviews{" +
                 "id=" + id +
                 ", loginDetails=" + loginDetails +
+                ", instructor=" + instructor +
                 ", message='" + message + '\'' +
                 ", created=" + created +
                 '}';

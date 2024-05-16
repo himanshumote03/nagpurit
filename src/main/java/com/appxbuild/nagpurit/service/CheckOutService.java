@@ -1,6 +1,7 @@
 package com.appxbuild.nagpurit.service;
 
 import com.appxbuild.nagpurit.entity.CheckOut;
+
 import java.util.List;
 
 public interface CheckOutService {

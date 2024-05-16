@@ -5,37 +5,37 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "account_deletion_msg")
-public class AccountDeletionMsg {
+@Table(name = "course_ratings")
+public class CourseRatings {
 
-    // fields
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "login_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "login_id", referencedColumnName = "id")
     private LoginDetails loginDetails;
 
-    @Column(name = "message")
-    private String message;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private Courses courses;
+
+    @Column(name = "ratings")
+    private Double ratings;
 
     @Column(name = "created")
     private LocalDateTime created;
 
 
-    // constructor
-    public AccountDeletionMsg() {
-
+    public CourseRatings() {
     }
 
-    public AccountDeletionMsg(String message, LocalDateTime created) {
-        this.message = message;
+    public CourseRatings(Double ratings, LocalDateTime created) {
+        this.ratings = ratings;
         this.created = created;
     }
 
-
-    // getter/setter
     public int getId() {
         return id;
     }
@@ -52,12 +52,20 @@ public class AccountDeletionMsg {
         this.loginDetails = loginDetails;
     }
 
-    public String getMessage() {
-        return message;
+    public Courses getCourses() {
+        return courses;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setCourses(Courses courses) {
+        this.courses = courses;
+    }
+
+    public Double getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Double ratings) {
+        this.ratings = ratings;
     }
 
     public LocalDateTime getCreated() {
@@ -69,14 +77,13 @@ public class AccountDeletionMsg {
     }
 
 
-    // toString()
-
     @Override
     public String toString() {
-        return "AccountDeletionMsg{" +
+        return "Reviews{" +
                 "id=" + id +
                 ", loginDetails=" + loginDetails +
-                ", message='" + message + '\'' +
+                ", courses=" + courses +
+                ", ratings='" + ratings + '\'' +
                 ", created=" + created +
                 '}';
     }

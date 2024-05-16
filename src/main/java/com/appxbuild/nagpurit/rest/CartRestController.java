@@ -1,8 +1,6 @@
 package com.appxbuild.nagpurit.rest;
 
 import com.appxbuild.nagpurit.entity.Cart;
-import com.appxbuild.nagpurit.entity.MyCourses;
-import com.appxbuild.nagpurit.entity.Wishlist;
 import com.appxbuild.nagpurit.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

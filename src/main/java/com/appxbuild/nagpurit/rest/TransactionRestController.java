@@ -1,18 +1,13 @@
 package com.appxbuild.nagpurit.rest;
 
-import com.appxbuild.nagpurit.entity.MyCourses;
 import com.appxbuild.nagpurit.entity.Transactions;
-import com.appxbuild.nagpurit.entity.User;
-import com.appxbuild.nagpurit.entity.Wishlist;
 import com.appxbuild.nagpurit.service.TransactionsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController

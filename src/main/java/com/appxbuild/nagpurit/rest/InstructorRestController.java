@@ -7,7 +7,6 @@ import com.appxbuild.nagpurit.entity.Instructor;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,11 +42,18 @@ public class InstructorRestController {
 
     // add mapping GET("/instructor/{id}") to get a Instructor
     @GetMapping("/instructor/{id}")
-    public ResponseEntity<Instructor> getInstructor(@PathVariable int id) {
+    public Optional<Instructor> getInstructor(@PathVariable int id) {
         Optional<Instructor> theInstructor = instructorDao.findById(id);
-        return theInstructor.map(instructor -> new ResponseEntity<>(instructor, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (theInstructor.isEmpty()) {
+            return Optional.of(new Instructor());
+        }
+        return theInstructor;
     }
+//    public ResponseEntity<Instructor> getInstructor(@PathVariable int id) {
+//        Optional<Instructor> theInstructor = instructorDao.findById(id);
+//        return theInstructor.map(instructor -> new ResponseEntity<>(instructor, HttpStatus.OK))
+//                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
 
     // add mapping POST("/instructor") to add an Instructor
@@ -83,8 +86,8 @@ public class InstructorRestController {
             instructor.setId(instructorDto.getId());
             instructor.setImage(imageUrl);
             instructor.setName(instructorDto.getName());
+            instructor.setDesignation(instructorDto.getDesignation());
             instructor.setTotalStudents(instructorDto.getTotalStudents());
-            instructor.setReviews(instructorDto.getReviews());
             instructor.setDescription(instructorDto.getDescription());
             instructor.setGithubUrl(instructorDto.getGithubUrl());
             instructor.setLinkedinUrl(instructorDto.getLinkedinUrl());
@@ -131,8 +134,8 @@ public class InstructorRestController {
         existingInstructor.setId(instructorDto.getId());
         existingInstructor.setName(instructorDto.getName());
         existingInstructor.setTotalStudents(instructorDto.getTotalStudents());
-        existingInstructor.setReviews(instructorDto.getReviews());
         existingInstructor.setDescription(instructorDto.getDescription());
+        existingInstructor.setDesignation(instructorDto.getDesignation());
         existingInstructor.setGithubUrl(instructorDto.getGithubUrl());
         existingInstructor.setLinkedinUrl(instructorDto.getLinkedinUrl());
 

@@ -7,6 +7,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class CoursesDto {
 
     // define fields
@@ -18,9 +20,11 @@ public class CoursesDto {
 
     private String courseTitle;
 
-    private String description;
+    private String descriptionTitle;
 
-    private Double ratings;
+    private String descriptionContent;
+
+    private Double duration;
 
     private MultipartFile imageFile;
 
@@ -40,18 +44,24 @@ public class CoursesDto {
     public CoursesDto(){
 
     }
-    public CoursesDto(String courseTitle, String description, Double ratings, MultipartFile imageFile, String language, String subTitle, int cost, String courseOutcome) {
+
+    public CoursesDto(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, MultipartFile imageFile, String language, String subTitle, int cost, String courseOutcome, Instructor instructor) {
+        this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
-        this.description = description;
-        this.ratings = ratings;
+        this.descriptionTitle = descriptionTitle;
+        this.descriptionContent = descriptionContent;
+        this.duration = duration;
         this.imageFile = imageFile;
         this.language = language;
         this.subTitle = subTitle;
         this.cost = cost;
         this.courseOutcome = courseOutcome;
+        this.instructor = instructor;
     }
 
     // define getter/setter
+
+
     public int getId() {
         return id;
     }
@@ -76,20 +86,28 @@ public class CoursesDto {
         this.courseTitle = courseTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionTitle() {
+        return descriptionTitle;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionTitle(String descriptionTitle) {
+        this.descriptionTitle = descriptionTitle;
     }
 
-    public Double getRatings() {
-        return ratings;
+    public String getDescriptionContent() {
+        return descriptionContent;
     }
 
-    public void setRatings(Double ratings) {
-        this.ratings = ratings;
+    public void setDescriptionContent(String descriptionContent) {
+        this.descriptionContent = descriptionContent;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
     }
 
     public MultipartFile getImageFile() {
@@ -147,15 +165,15 @@ public class CoursesDto {
                 "id=" + id +
                 ", courseCategories=" + courseCategories +
                 ", courseTitle='" + courseTitle + '\'' +
-                ", description='" + description + '\'' +
-                ", ratings=" + ratings +
+                ", descriptionTitle='" + descriptionTitle + '\'' +
+                ", descriptionContent='" + descriptionContent + '\'' +
+                ", duration=" + duration +
                 ", imageFile=" + imageFile +
                 ", language='" + language + '\'' +
                 ", subTitle='" + subTitle + '\'' +
                 ", cost=" + cost +
-                ", courseOutcome='" + courseOutcome + '\'' +
+                ", courseOutcome=" + courseOutcome +
                 ", instructor=" + instructor +
                 '}';
     }
-
 }
