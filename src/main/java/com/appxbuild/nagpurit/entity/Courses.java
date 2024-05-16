@@ -67,12 +67,17 @@ public class Courses {
     @OneToMany(mappedBy = "courses")
     private List<Reviews> reviews;
 
+    @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("courses")
+    private List<CourseRatings> courseRatings;
+
+
     // define constructor
     public Courses(){
 
     }
 
-    public Courses(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, String image, String language, String subTitle, int cost, String courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<MyCourses> myCourses, List<Section> section, List<Reviews> reviews) {
+    public Courses(CourseCategories courseCategories, String courseTitle, String descriptionTitle, String descriptionContent, Double duration, String image, String language, String subTitle, int cost, String courseOutcome, Instructor instructor, LocalDateTime created, LocalDateTime modified, List<MyCourses> myCourses, List<Section> section, List<Reviews> reviews, List<CourseRatings> courseRatings) {
         this.courseCategories = courseCategories;
         this.courseTitle = courseTitle;
         this.descriptionTitle = descriptionTitle;
@@ -89,6 +94,7 @@ public class Courses {
         this.myCourses = myCourses;
         this.section = section;
         this.reviews = reviews;
+        this.courseRatings = courseRatings;
     }
 
 
@@ -221,6 +227,14 @@ public class Courses {
         this.reviews = reviews;
     }
 
+    public List<CourseRatings> getCourseRatings() {
+        return courseRatings;
+    }
+
+    public void setCourseRatings(List<CourseRatings> courseRatings) {
+        this.courseRatings = courseRatings;
+    }
+
     // define toString method
     @Override
     public String toString() {
@@ -235,15 +249,14 @@ public class Courses {
                 ", language='" + language + '\'' +
                 ", subTitle='" + subTitle + '\'' +
                 ", cost=" + cost +
-                ", courseOutcome=" + courseOutcome +
+                ", courseOutcome='" + courseOutcome + '\'' +
                 ", instructor=" + instructor +
                 ", created=" + created +
                 ", modified=" + modified +
                 ", myCourses=" + myCourses +
                 ", section=" + section +
                 ", reviews=" + reviews +
+                ", courseRatings=" + courseRatings +
                 '}';
     }
-
-
 }

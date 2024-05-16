@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -45,11 +46,19 @@ public class Instructor {
     @OneToMany(mappedBy = "instructor")
     private List<Courses> courses;
 
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("instructor")
+    private List<InstructorRatings> instructorRatings;
+
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("instructor")
+    private List<InstructorReviews> instructorReviews;
+
     // define constructor
     public Instructor(){
 
     }
-    public Instructor(String image, String name, int totalStudents, String designation, String description, String githubUrl, String linkedinUrl, LocalDateTime created, LocalDateTime modified) {
+    public Instructor(String image, String name, int totalStudents, String designation, String description, String githubUrl, String linkedinUrl, LocalDateTime created, LocalDateTime modified, List<InstructorRatings> instructorRatings, List<InstructorReviews> instructorReviews) {
         this.image = image;
         this.name = name;
         this.totalStudents = totalStudents;
@@ -59,6 +68,8 @@ public class Instructor {
         this.linkedinUrl = linkedinUrl;
         this.created = created;
         this.modified = modified;
+        this.instructorRatings = instructorRatings;
+        this.instructorReviews = instructorReviews;
     }
 
     // define getter/setter
@@ -142,6 +153,22 @@ public class Instructor {
         this.modified = modified;
     }
 
+    public List<InstructorRatings> getInstructorRatings() {
+        return instructorRatings;
+    }
+
+    public void setInstructorRatings(List<InstructorRatings> instructorRatings) {
+        this.instructorRatings = instructorRatings;
+    }
+
+    public List<InstructorReviews> getInstructorReviews() {
+        return instructorReviews;
+    }
+
+    public void setInstructorReviews(List<InstructorReviews> instructorReviews) {
+        this.instructorReviews = instructorReviews;
+    }
+
     // define toString method
     @Override
     public String toString() {
@@ -157,6 +184,9 @@ public class Instructor {
                 ", created=" + created +
                 ", modified=" + modified +
                 ", courses=" + courses +
+                ", instructorRatings=" + instructorRatings +
+                ", instructorReviews=" + instructorReviews +
                 '}';
     }
+
 }
