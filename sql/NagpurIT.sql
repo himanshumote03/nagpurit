@@ -389,7 +389,7 @@ CREATE TABLE `instructor_ratings` (
 
 
 
-ALTER TABLE `instructor_ratings`
-ADD `` varchar(255);
+ALTER TABLE `instructor_reviews`
+ADD `ratings` DOUBLE DEFAULT NULL;
 
 
