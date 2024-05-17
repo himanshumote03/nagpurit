@@ -37,10 +37,10 @@ public class CheckOutRestController {
     }
 
     @GetMapping("/checkOut/login/{loginId}")
-    public ResponseEntity<List<CheckOut>> getCheckInsByLoginId(@PathVariable int loginId) {
+    public ResponseEntity<List<CheckOut>> getCheckOutByLoginId(@PathVariable int loginId) {
         List<CheckOut> checkOuts = checkOutService.findAll()
                 .stream()
-                .filter(checkOut -> checkOut.getLoginDetails() != null && checkOut.getLoginDetails().getId() == loginId)
+                .filter(checkOut -> checkOut.getLoginDetails() == loginId)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(checkOuts);
     }

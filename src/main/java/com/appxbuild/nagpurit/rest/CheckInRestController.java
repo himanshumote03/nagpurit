@@ -40,7 +40,7 @@ public class CheckInRestController {
     public ResponseEntity<List<CheckIn>> getCheckInsByLoginId(@PathVariable int loginId) {
         List<CheckIn> checkIns = checkInService.findAll()
                 .stream()
-                .filter(checkIn -> checkIn.getLoginDetails() != null && checkIn.getLoginDetails().getId() == loginId)
+                .filter(checkIn -> checkIn.getLoginDetails() == loginId)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(checkIns);

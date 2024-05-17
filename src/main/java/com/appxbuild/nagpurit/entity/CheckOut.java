@@ -53,8 +53,8 @@ public class CheckOut {
         this.id = id;
     }
 
-    public LoginDetails getLoginDetails() {
-        return loginDetails;
+    public int getLoginDetails() {
+        return loginDetails.getId();
     }
 
     public void setLoginDetails(LoginDetails loginDetails) {
