@@ -96,7 +96,7 @@ public class LoginDetailsRestController {
                 user.setEmail(null);
                 user.setPassword(null);
                 loginDetailsService.save(user);
-                return "Account Deleted";
+                return "Account Deleted Successfully";
             }
         }
         return "Invalid password.";

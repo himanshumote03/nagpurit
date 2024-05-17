@@ -22,12 +22,12 @@ public class ReviewsRestController {
         this.reviewsService = reviewsService;
     }
 
-    @GetMapping("/reviews")
+    @GetMapping("/courseReviews")
     public List<Reviews> findAll(){
         return reviewsService.findAll();
     }
 
-    @GetMapping("/reviews/{id}")
+    @GetMapping("/courseReviews/{id}")
     public Reviews getReviews(@PathVariable int id){
         Reviews theReviews = reviewsService.findById(id);
         if (theReviews==null){
@@ -37,7 +37,7 @@ public class ReviewsRestController {
     }
 
 
-//    @GetMapping("/reviews/login/{loginId}")
+//    @GetMapping("/courseReviews/login/{loginId}")
 //    public ResponseEntity<List<Reviews>> getReviewByLoginId(@PathVariable int loginId) {
 //        List<Reviews> reviews = reviewsService.findAll()
 //                .stream()
@@ -46,7 +46,7 @@ public class ReviewsRestController {
 //        return ResponseEntity.ok(reviews);
 //    }
 
-//    @GetMapping("/reviews/course/{courseId}")
+//    @GetMapping("/courseReviews/course/{courseId}")
 //    public ResponseEntity<List<Reviews>> getReviewByCourseId(@PathVariable int courseId) {
 //        List<Reviews> reviews = reviewsService.findAll()
 //                .stream()
@@ -54,7 +54,7 @@ public class ReviewsRestController {
 //                .collect(Collectors.toList());
 //        return ResponseEntity.ok(reviews);}
 
-    @PostMapping("/reviews")
+    @PostMapping("/courseReviews")
     public Reviews addReview(@RequestBody Reviews reviews) {
         reviews.setId(0);
         LocalDateTime dt = LocalDateTime.now();
@@ -63,7 +63,7 @@ public class ReviewsRestController {
         return newReviews;
     }
 
-    @PutMapping("/reviews")
+    @PutMapping("/courseReviews")
     public Reviews updateReview(@RequestBody Reviews reviews) {
         Reviews existingReviews = reviewsService.findById(reviews.getId());
 
@@ -77,11 +77,11 @@ public class ReviewsRestController {
         return newReviews;
     }
 
-    @DeleteMapping("/reviews/{id}")
+    @DeleteMapping("/courseReviews/{id}")
     public String deleteReview(@PathVariable int id) {
         Reviews reviews = reviewsService.findById(id);
         if (reviews == null) {
-            throw new RuntimeException("Reviews id is not found " + id);
+            return ("Reviews id is not found " + id);
         }
         reviewsService.deleteById(id);
         return ("Deleted Reviews id " + id);
