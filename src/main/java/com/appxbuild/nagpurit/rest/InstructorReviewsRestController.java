@@ -39,22 +39,23 @@ public class InstructorReviewsRestController {
     }
 
 
-    @GetMapping("/instructorReviews/login/{loginId}")
-    public ResponseEntity<List<InstructorReviews>> getReviewByLoginId(@PathVariable int loginId) {
-        List<InstructorReviews> reviews = instructorReviewsService.findAll()
-                .stream()
-                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(reviews);
-    }
+//    @GetMapping("/instructorReviews/login/{loginId}")
+//    public ResponseEntity<List<InstructorReviews>> getReviewByLoginId(@PathVariable int loginId) {
+//        List<InstructorReviews> reviews = instructorReviewsService.findAll()
+//                .stream()
+//                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(reviews);
+//    }
 
-    @GetMapping("/instructorReviews/course/{instructorId}")
-    public ResponseEntity<List<InstructorReviews>> getReviewByCourseId(@PathVariable int instructorId) {
-        List<InstructorReviews> reviews = instructorReviewsService.findAll()
-                .stream()
-                .filter(u -> u.getInstructor() != null && u.getInstructor().getId() == instructorId)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(reviews);}
+//    @GetMapping("/instructorReviews/course/{instructorId}")
+//    public ResponseEntity<List<InstructorReviews>> getReviewByCourseId(@PathVariable int instructorId) {
+//        List<InstructorReviews> reviews = instructorReviewsService.findAll()
+//                .stream()
+//                .filter(u -> u.getInstructor() != null && u.getInstructor().getId() == instructorId)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(reviews);
+//    }
 
     @PostMapping("/instructorReviews")
     public InstructorReviews addReview(@RequestBody InstructorReviews reviews) {

@@ -21,6 +21,9 @@ public class Reviews {
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private Courses courses;
 
+    @Column(name = "ratings")
+    private Double ratings;
+
     @Column(name = "message")
     private String message;
 
@@ -31,7 +34,8 @@ public class Reviews {
     public Reviews() {
     }
 
-    public Reviews( String message, LocalDateTime created) {
+    public Reviews(Double ratings, String message, LocalDateTime created) {
+        this.ratings = ratings;
         this.message = message;
         this.created = created;
     }
@@ -44,20 +48,28 @@ public class Reviews {
         this.id = id;
     }
 
-    public LoginDetails getLoginDetails() {
-        return loginDetails;
+    public String getLoginDetails() {
+        return loginDetails.getName();
     }
 
     public void setLoginDetails(LoginDetails loginDetails) {
         this.loginDetails = loginDetails;
     }
 
-    public Courses getCourses() {
-        return courses;
-    }
+//    public Courses getCourses() {
+//        return courses;
+//    }
 
     public void setCourses(Courses courses) {
         this.courses = courses;
+    }
+
+    public Double getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Double ratings) {
+        this.ratings = ratings;
     }
 
     public String getMessage() {
@@ -83,6 +95,7 @@ public class Reviews {
                 "id=" + id +
                 ", loginDetails=" + loginDetails +
                 ", courses=" + courses +
+                ", ratings=" + ratings +
                 ", message='" + message + '\'' +
                 ", created=" + created +
                 '}';

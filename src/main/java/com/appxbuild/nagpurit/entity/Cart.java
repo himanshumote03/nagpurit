@@ -38,8 +38,8 @@ public class Cart {
     }
 
     // getter and setter
-    public LoginDetails getLoginDetails() {
-        return loginDetails;
+    public String getLoginDetails() {
+        return loginDetails.getName();
     }
 
     public void setLoginDetails(LoginDetails loginDetails) {

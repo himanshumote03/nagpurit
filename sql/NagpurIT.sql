@@ -40,8 +40,8 @@ CREATE TABLE `user` (
   `github_url` VARCHAR(512) DEFAULT NULL,
   `linkdin_url` VARCHAR(512) DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -53,8 +53,8 @@ CREATE TABLE `account_deletion_msg` (
   `id` INT PRIMARY KEY NOT NULL,
   `login_id` INT NOT NULL,
   `message` VARCHAR(255) DEFAULT NULL,
-  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`)
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -68,8 +68,8 @@ CREATE TABLE `check_in` (
   `project_name` VARCHAR(255) DEFAULT NULL,
   `task_description` VARCHAR(1000) DEFAULT NULL,
   `total_task` INT DEFAULT NULL,
-  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details` (`id`)
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -84,8 +84,8 @@ CREATE TABLE `check_out` (
   `todays_task` VARCHAR(1000) DEFAULT NULL,
   `working_hours_report` VARCHAR(1000) DEFAULT NULL,
   `total_hours` INT DEFAULT NULL,
-  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`)
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -115,8 +115,8 @@ CREATE TABLE `fields_details` (
   `field_id` INT DEFAULT NULL,
   `field_name` VARCHAR(512) NOT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`field_id`) REFERENCES `fields`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`field_id`) REFERENCES `fields`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO `fields_details` (`id`, `field_id`, `field_name`) 
@@ -138,9 +138,9 @@ CREATE TABLE `career_goal` (
   `current_goal` VARCHAR(255) DEFAULT NULL,
   `field_details_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`field_details_id`) REFERENCES `fields_details`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`field_details_id`) REFERENCES `fields_details`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -172,7 +172,6 @@ CREATE TABLE `instructor` (
   `name` VARCHAR(255) DEFAULT NULL,
   `designation` VARCHAR(512) DEFAULT NULL,
   `total_students` INT DEFAULT NULL,
--- `reviews` INT DEFAULT NULL,
   `description` VARCHAR(1000) DEFAULT NULL,
   `github_url` VARCHAR(512) DEFAULT NULL,
   `linkdin_url` VARCHAR(512) DEFAULT NULL,
@@ -189,9 +188,9 @@ CREATE TABLE `courses` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `course_category_id` INT DEFAULT NULL,
   `course_title` VARCHAR(255) DEFAULT NULL,
-  `description_title` VARCHAR(512) DEFAULT NULL, -- description
+  `description_title` VARCHAR(512) DEFAULT NULL, 
   `description_content` VARCHAR(1000) DEFAULT NULL,
-  `duration` DOUBLE DEFAULT NULL, -- ratings
+  `duration` DOUBLE DEFAULT NULL,
   `image` VARCHAR(512) NOT NULL,
   `language` VARCHAR(100) NOT NULL,
   `sub_title` VARCHAR(255) DEFAULT NULL,
@@ -199,9 +198,9 @@ CREATE TABLE `courses` (
   `course_outcome` VARCHAR(255) DEFAULT NULL,
   `instructor_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`course_category_id`) REFERENCES `course_categories`(`id`),
-  FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`course_category_id`) REFERENCES `course_categories`(`id`),
+--   FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -214,8 +213,8 @@ CREATE TABLE `section` (
   `course_id` INT DEFAULT NULL,
   `section_name` VARCHAR(255) DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -231,8 +230,8 @@ CREATE TABLE `videos` (
   `video_url` VARCHAR(512) DEFAULT NULL,
   `duration` VARCHAR(45) DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`section_id`) REFERENCES `section`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`section_id`) REFERENCES `section`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -245,9 +244,9 @@ CREATE TABLE `my_courses` (
   `login_id` INT DEFAULT NULL,
   `course_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -260,9 +259,9 @@ CREATE TABLE `wishlist` (
   `login_id` INT DEFAULT NULL,
   `course_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -275,9 +274,9 @@ CREATE TABLE `cart` (
   `login_id` INT DEFAULT NULL,
   `course_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -290,9 +289,9 @@ CREATE TABLE `favourite` (
   `login_id` INT DEFAULT NULL,
   `course_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -323,9 +322,9 @@ CREATE TABLE `transactions` (
   `payment_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `installment_plan_id` INT DEFAULT NULL,
   `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` DATETIME NULL DEFAULT NULL,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`installment_plan_id`) REFERENCES `installment_plan`(`id`)
+  `modified` DATETIME NULL DEFAULT NULL
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`installment_plan_id`) REFERENCES `installment_plan`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -337,10 +336,11 @@ CREATE TABLE `reviews` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `login_id` INT DEFAULT NULL,
   `course_id` INT DEFAULT NULL,
-  `message` VARCHAR(255) DEFAULT NULL,
-  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+  `ratings` DOUBLE DEFAULT NULL,
+  `message` VARCHAR(1024) DEFAULT NULL,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 --
@@ -352,9 +352,9 @@ CREATE TABLE `course_ratings` (
   `login_id` INT DEFAULT NULL,
   `course_id` INT DEFAULT NULL,
   `ratings` DOUBLE DEFAULT NULL,
-  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -366,10 +366,11 @@ CREATE TABLE `instructor_reviews` (
   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `login_id` INT DEFAULT NULL,
   `instructor_id` INT DEFAULT NULL,
-  `message` VARCHAR(255) DEFAULT NULL,
-  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`)
+  `ratings` DOUBLE DEFAULT NULL,
+  `message` VARCHAR(1024) DEFAULT NULL,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 --
@@ -381,13 +382,14 @@ CREATE TABLE `instructor_ratings` (
   `login_id` INT DEFAULT NULL,
   `instructor_id` INT DEFAULT NULL,
   `ratings` DOUBLE DEFAULT NULL,
-  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
-  FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`)
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+--   FOREIGN KEY (`login_id`) REFERENCES `login_details`(`id`),
+--   FOREIGN KEY (`instructor_id`) REFERENCES `instructor`(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 
-
+ALTER TABLE `instructor_reviews`
+ADD `ratings` DOUBLE DEFAULT NULL;
 
 
