@@ -44,6 +44,7 @@ public class Instructor {
     private LocalDateTime modified;
 
     @OneToMany(mappedBy = "instructor")
+    @JsonIgnoreProperties("instructor")
     private List<Courses> courses;
 
 
@@ -156,6 +157,11 @@ public class Instructor {
     public void setInstructorReviews(List<InstructorReviews> instructorReviews) {
         this.instructorReviews = instructorReviews;
     }
+
+    public List<Courses> getCourses() {
+        return courses;
+    }
+
 
     // define toString method
     @Override
