@@ -65,8 +65,8 @@ public class User {
         this.id = id;
     }
 
-    public int getLoginDetails() {
-        return loginDetails.getId();
+    public LoginDetails getLoginDetails() {
+        return loginDetails;
     }
 
     public void setLoginDetails(LoginDetails loginDetails) {
