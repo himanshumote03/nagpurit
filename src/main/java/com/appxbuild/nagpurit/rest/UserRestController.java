@@ -58,7 +58,7 @@ public class UserRestController {
     public ResponseEntity<List<User>> getUserByLoginId(@PathVariable int loginId) {
         List<User> user = userDao.findAll()
                 .stream()
-                .filter(u -> u.getLoginDetails() != null && u.getLoginDetails().getId() == loginId)
+                .filter(u ->  u.getLoginDetails() == loginId)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(user);
     }
