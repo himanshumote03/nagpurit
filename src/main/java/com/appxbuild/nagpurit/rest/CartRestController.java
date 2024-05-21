@@ -36,14 +36,15 @@ public class CartRestController {
         return theCart;
     }
 
-//    @GetMapping("/cart/login/{loginId}")
-//    public ResponseEntity<List<Cart>> getCartByLoginId(@PathVariable int loginId) {
-//        List<Cart> theCart = cartService.findAll()
-//                .stream()
-//                .filter(cart -> cart.getLoginDetails() != null && cart.getLoginDetails().getId() == loginId)
-//                .collect(Collectors.toList());
-//        return ResponseEntity.ok(theCart);
-//    }
+    @GetMapping("/cart/login/{loginId}")
+    public ResponseEntity<List<Cart>> getCartByLoginId(@PathVariable int loginId) {
+        List<Cart> theCart = cartService.findAll()
+                .stream()
+                .filter(cart -> cart.getLoginDetails() == loginId)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(theCart);
+    }
+
     @PostMapping("/cart")
     public Cart addCart(@RequestBody Cart theCart){
         theCart.setId(0);
@@ -76,7 +77,7 @@ public class CartRestController {
             throw new RuntimeException("Cart is not found " + id);
         }
         cartService.deleteById(id);
-        return "Deleted Wishlist id " + id;
+        return "Deleted cart id " + id;
     }
 
 }
