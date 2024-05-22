@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "instructor")
@@ -158,9 +160,19 @@ public class Instructor {
         this.instructorReviews = instructorReviews;
     }
 
-    public List<Courses> getCourses() {
-        return courses;
+    public List<String> getCourses() {
+        return courses.stream()
+                .map(Courses::getCourseTitle)
+                .collect(Collectors.toList()).reversed();
     }
+
+//    public List<String> getCourses() {
+//        List<String> courseNames = new ArrayList<>();
+//        for (Courses course : courses) {
+//            courseNames.add(course.getCourseTitle()); // Assuming getName() method exists in Courses class
+//        }
+//        return courseNames;
+//    }
 
 
     // define toString method

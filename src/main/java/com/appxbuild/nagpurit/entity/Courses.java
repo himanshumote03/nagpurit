@@ -69,9 +69,16 @@ public class Courses {
     @JsonIgnoreProperties("courses")
     private List<Reviews> reviews;
 
+//    @OneToMany(mappedBy = "courses")
+//    @JsonIgnoreProperties("courses")
+//    private List<Reviews> reviews;
+
+//    private List<Reviews> reviewsRatings;
+
     @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("courses")
     private List<CourseRatings> courseRatings;
+
 
 
     // define constructor
