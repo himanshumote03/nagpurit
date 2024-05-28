@@ -31,7 +31,7 @@ public class LoginDetails {
     @Column(name = "modified")
     private LocalDateTime modified;
 
-    @OneToMany(mappedBy = "loginDetails")
+    @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
     private List<CareerGoal> careerGoals;
 
 //    @OneToMany(mappedBy = "loginDetails")
@@ -51,6 +51,7 @@ public class LoginDetails {
     @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("loginDetails")
     private List<Cart> cart;
+
     @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("loginDetails")
     private List<Wishlist> wishlists;
@@ -62,6 +63,7 @@ public class LoginDetails {
     @OneToMany(mappedBy = "loginDetails", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("loginDetails")
     private List<Transactions> transactions;
+
 
 
 

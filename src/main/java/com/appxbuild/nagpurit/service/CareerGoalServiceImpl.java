@@ -46,4 +46,9 @@ public class CareerGoalServiceImpl implements CareerGoalService {
     public void deleteById(int theId) {
         careerGoalDao.deleteById(theId);
     }
+
+    @Override
+    public CareerGoal findByLoginId(int loginId) {
+        return careerGoalDao.findByLoginId(loginId);
+    }
 }

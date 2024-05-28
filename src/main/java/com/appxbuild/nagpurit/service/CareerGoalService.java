@@ -13,4 +13,5 @@ public interface CareerGoalService {
     CareerGoal save(CareerGoal theCareerGoal);
     void deleteById(int theId);
 
+    CareerGoal findByLoginId(int loginId);
 }

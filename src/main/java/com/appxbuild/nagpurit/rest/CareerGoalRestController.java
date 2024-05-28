@@ -1,8 +1,12 @@
 package com.appxbuild.nagpurit.rest;
 
 import com.appxbuild.nagpurit.entity.CareerGoal;
+import com.appxbuild.nagpurit.entity.LoginDetails;
 import com.appxbuild.nagpurit.service.CareerGoalService;
+import com.appxbuild.nagpurit.service.LoginDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -14,10 +18,12 @@ import java.util.List;
 public class CareerGoalRestController {
 
     private CareerGoalService careerGoalService;
+    private LoginDetailsService loginDetailsService;
 
     @Autowired
-    public CareerGoalRestController(CareerGoalService theCareerGoalService){
+    public CareerGoalRestController(CareerGoalService theCareerGoalService, LoginDetailsService theLoginDetailsService){
         careerGoalService = theCareerGoalService;
+        loginDetailsService = theLoginDetailsService;
     }
 
     // add mapping GET("/careerGoal") to get a list of CareerGoal
@@ -38,13 +44,33 @@ public class CareerGoalRestController {
 
     // add mapping GET("/careerGoal) to add a CareerGoal
     @PostMapping("/careerGoal")
-    public CareerGoal addCareerGoal(@RequestBody CareerGoal theCareerGoal){
-        theCareerGoal.setId(0);
-        LocalDateTime localDateTime = LocalDateTime.now();
-        theCareerGoal.setCreated(localDateTime);
-        theCareerGoal.setModified(null);
-        CareerGoal newCareerGoal = careerGoalService.save(theCareerGoal);
-        return newCareerGoal;
+    public ResponseEntity<CareerGoal> addOrUpdateCareerGoal(@RequestBody CareerGoal theCareerGoal) {
+        LocalDateTime now = LocalDateTime.now();
+        CareerGoal existingCareerGoal = careerGoalService.findByLoginId(theCareerGoal.getLoginDetails().getId());
+
+        if (existingCareerGoal != null) {
+            // Update existing CareerGoal
+            existingCareerGoal.setCurrentGoal(theCareerGoal.getCurrentGoal());
+            existingCareerGoal.setFieldsDetails(theCareerGoal.getFieldsDetails());
+            existingCareerGoal.setModified(now);
+            careerGoalService.save(existingCareerGoal);
+            return new ResponseEntity<>(existingCareerGoal, HttpStatus.OK);
+        } else {
+            // Add new CareerGoal
+            theCareerGoal.setId(0);
+            theCareerGoal.setCreated(now);
+            theCareerGoal.setModified(null);
+
+            // Find the associated LoginDetails
+            LoginDetails loginDetails = loginDetailsService.findById(theCareerGoal.getLoginDetails().getId());
+            if (loginDetails == null) {
+                throw new RuntimeException("LoginDetails id not found - " + theCareerGoal.getLoginDetails().getId());
+            }
+            theCareerGoal.setLoginDetails(loginDetails);
+
+            CareerGoal newCareerGoal = careerGoalService.save(theCareerGoal);
+            return new ResponseEntity<>(newCareerGoal, HttpStatus.CREATED);
+        }
     }
 
     // add mapping POST("/careerGoal") to update an existing CareerGoal
@@ -64,6 +90,7 @@ public class CareerGoalRestController {
         CareerGoal newCareerGoal = careerGoalService.save(theCareerGoal);
         return newCareerGoal;
     }
+
 
     // add mapping DELETE("/careerGoal/{id}") to delete a CareerGoal
     @DeleteMapping("/careerGoal/{id}")
