@@ -46,7 +46,7 @@ public class CareerGoalRestController {
     @PostMapping("/careerGoal")
     public ResponseEntity<CareerGoal> addOrUpdateCareerGoal(@RequestBody CareerGoal theCareerGoal) {
         LocalDateTime now = LocalDateTime.now();
-        CareerGoal existingCareerGoal = careerGoalService.findByLoginId(theCareerGoal.getLoginDetails().getId());
+        CareerGoal existingCareerGoal = careerGoalService.findByLoginId(theCareerGoal.getLoginDetails());
 
         if (existingCareerGoal != null) {
             // Update existing CareerGoal
@@ -62,9 +62,9 @@ public class CareerGoalRestController {
             theCareerGoal.setModified(null);
 
             // Find the associated LoginDetails
-            LoginDetails loginDetails = loginDetailsService.findById(theCareerGoal.getLoginDetails().getId());
+            LoginDetails loginDetails = loginDetailsService.findById(theCareerGoal.getLoginDetails());
             if (loginDetails == null) {
-                throw new RuntimeException("LoginDetails id not found - " + theCareerGoal.getLoginDetails().getId());
+                throw new RuntimeException("LoginDetails id not found - " + theCareerGoal.getLoginDetails());
             }
             theCareerGoal.setLoginDetails(loginDetails);
 
