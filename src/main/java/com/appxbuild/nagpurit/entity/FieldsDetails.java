@@ -1,5 +1,6 @@
 package com.appxbuild.nagpurit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class FieldsDetails {
     private LocalDateTime modified;
 
     @OneToMany(mappedBy = "fieldsDetails")
+    @JsonIgnoreProperties("fieldsDetails")
     private List<CareerGoal> careerGoals;
 
     // define constructor

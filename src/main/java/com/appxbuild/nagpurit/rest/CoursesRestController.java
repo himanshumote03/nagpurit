@@ -59,7 +59,7 @@ public class CoursesRestController {
     @PostMapping("/courses")
     public ResponseEntity<String> addCourse(
             @Valid @ModelAttribute CoursesDto coursesDto,
-            @RequestParam("image") MultipartFile image,
+            @RequestParam(value="image", required = false) MultipartFile image,
             BindingResult result
     ) throws IOException, GeneralSecurityException {
         if (result.hasErrors()) {
@@ -67,46 +67,45 @@ public class CoursesRestController {
         }
 
         // Save image file
-        if (image.isEmpty()) {
-            return new ResponseEntity<>("Image file is required", HttpStatus.BAD_REQUEST);
-        }
+        String imageUrl = "";
+        if (image != null && !image.isEmpty()) {
+            try {
+                // Upload image to Google Drive and get image URL
+                File tempFile = File.createTempFile("course", null);
+                image.transferTo(tempFile);
+                imageUrl = courseService.uploadImageToDrive(tempFile);
 
-        try {
-            // Upload image to Google Drive and get image URL
-            File tempFile = File.createTempFile("course", null);
-            image.transferTo(tempFile);
-            String imageUrl = courseService.uploadImageToDrive(tempFile);
-
-            if (imageUrl == null || imageUrl.isEmpty()) {
-                return new ResponseEntity<>("Failed to upload image to Google Drive", HttpStatus.INTERNAL_SERVER_ERROR);
+                if (imageUrl == null || imageUrl.isEmpty()) {
+                    return new ResponseEntity<>("Failed to upload image to Google Drive", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            } catch (IOException e) {
+                return new ResponseEntity<>("Error processing image upload: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
-
-            // Create a new User entity and set user details
-
-            Courses courses = new Courses();
-            courses.setId(coursesDto.getId());
-            courses.setImage(imageUrl);  // Set the image URL
-            courses.setCourseCategories(coursesDto.getCourseCategories());
-            courses.setCourseTitle(coursesDto.getCourseTitle());
-            courses.setDescriptionTitle(coursesDto.getDescriptionTitle());
-            courses.setDescriptionContent(coursesDto.getDescriptionTitle());
-            courses.setLanguage(coursesDto.getLanguage());
-            courses.setDuration(coursesDto.getDuration());
-            courses.setSubTitle(coursesDto.getSubTitle());
-            courses.setCost(coursesDto.getCost());
-            courses.setCourseOutcome(coursesDto.getCourseOutcome());
-            courses.setInstructor(coursesDto.getInstructor());
-            courses.setCreated(LocalDateTime.now());
-            courses.setModified(null);
-
-            // save course to database
-            coursesDao.save(courses);
-
-            return new ResponseEntity<>("Course added successfully", HttpStatus.CREATED);
-
-        } catch (IOException e) {
-            return new ResponseEntity<>("Error processing image upload: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+
+        // Create a new User entity and set user details
+
+        Courses courses = new Courses();
+        courses.setId(coursesDto.getId());
+        courses.setImage(imageUrl);  // Set the image URL
+        courses.setCourseCategories(coursesDto.getCourseCategories());
+        courses.setCourseTitle(coursesDto.getCourseTitle());
+        courses.setDescriptionTitle(coursesDto.getDescriptionTitle());
+        courses.setDescriptionContent(coursesDto.getDescriptionTitle());
+        courses.setLanguage(coursesDto.getLanguage());
+        courses.setDuration(coursesDto.getDuration());
+        courses.setSubTitle(coursesDto.getSubTitle());
+        courses.setCost(coursesDto.getCost());
+        courses.setCourseOutcome(coursesDto.getCourseOutcome());
+        courses.setInstructor(coursesDto.getInstructor());
+        courses.setCreated(LocalDateTime.now());
+        courses.setModified(null);
+
+        // save course to database
+        coursesDao.save(courses);
+
+        return new ResponseEntity<>("Course added successfully", HttpStatus.CREATED);
     }
 
 

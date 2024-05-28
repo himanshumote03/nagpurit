@@ -67,46 +67,47 @@ public class UserRestController {
     @PostMapping("/user")
     public ResponseEntity<String> addUserWithImage(
             @Valid @ModelAttribute UserDto userDto,
-            @RequestParam("image") MultipartFile image,
+            @RequestParam(value="image", required = false) MultipartFile image,
             BindingResult result
     ) throws IOException, GeneralSecurityException {
         if (result.hasErrors()) {
             return new ResponseEntity<>("The request body contains validation errors", HttpStatus.BAD_REQUEST);
         }
 
-        if (image.isEmpty()) {
-            return new ResponseEntity<>("Image file is required", HttpStatus.BAD_REQUEST);
-        }
+        // Save image file
+        String imageUrl = "";
+        if (image != null && !image.isEmpty()) {
+            try {
+                // Upload image to Google Drive and get image URL
+                File tempFile = File.createTempFile("user", null);
+                image.transferTo(tempFile);
+                imageUrl = userService.uploadImageToDrive(tempFile);
 
-        try {
-            // Upload image to Google Drive and get image URL
-            File tempFile = File.createTempFile("user", null);
-            image.transferTo(tempFile);
-            String imageUrl = userService.uploadImageToDrive(tempFile);
-
-            if (imageUrl == null || imageUrl.isEmpty()) {
-                return new ResponseEntity<>("Failed to upload image to Google Drive", HttpStatus.INTERNAL_SERVER_ERROR);
+                if (imageUrl == null || imageUrl.isEmpty()) {
+                    return new ResponseEntity<>("Failed to upload image to Google Drive", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
             }
-
-            // Create a new User entity and set user details
-            User user = new User();
-            user.setId(userDto.getId());
-            user.setLoginDetails(userDto.getLoginDetails());
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
-            user.setLanguage(userDto.getLanguage());
-            user.setGithubUrl(userDto.getGithubUrl());
-            user.setLinkdinUrl(userDto.getLinkdinUrl());
-            user.setImage(imageUrl); // Set the image URL
-            user.setCreated(LocalDateTime.now());
-
-            // Save user to database
-            userDao.save(user);
-
-            return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
-        } catch (IOException e) {
-            return new ResponseEntity<>("Error processing image upload: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            catch (IOException e) {
+                return new ResponseEntity<>("Error processing image upload: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
+
+        // Create a new User entity and set user details
+        User user = new User();
+        user.setId(userDto.getId());
+        user.setLoginDetails(userDto.getLoginDetails());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setLanguage(userDto.getLanguage());
+        user.setGithubUrl(userDto.getGithubUrl());
+        user.setLinkdinUrl(userDto.getLinkdinUrl());
+        user.setImage(imageUrl); // Set the image URL
+        user.setCreated(LocalDateTime.now());
+
+        // Save user to database
+        userDao.save(user);
+
+        return new ResponseEntity<>("User added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/user")

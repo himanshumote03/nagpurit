@@ -1,14 +1,11 @@
 package com.appxbuild.nagpurit.rest;
 
-import com.appxbuild.nagpurit.driveService.UserService;
 import com.appxbuild.nagpurit.entity.LoginDetails;
-import com.appxbuild.nagpurit.entity.User;
 import com.appxbuild.nagpurit.security.AESEncryption;
 import com.appxbuild.nagpurit.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -101,15 +98,7 @@ public class LoginDetailsRestController {
         }
         return "Invalid password.";
     }
-//    public String deleteLoginDetail(@PathVariable int id){
-//        LoginDetails theLoginDetails = loginDetailsService.findById(id);
-//        if (theLoginDetails == null) {
-//            return "Login id not found";
-//        }
-//        loginDetailsService.save(theLoginDetails);
-////        loginDetailsService.deleteById(id);
-//        return "Deleted " +id;
-//    }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDetails loginDetails) {
